@@ -1,0 +1,9 @@
+{
+  "name": "TugaZConsole",
+  "version": "0.0.1",
+  "description": "WTRL TTT Console",
+  "main": "hello-zwift_v2.js",
+  "bin": "bin.js", 
+  "author": "TugaZ",
+  "license": "MIT"
+}
