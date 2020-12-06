@@ -5,5 +5,10 @@
   "main": "hello-zwift_v2.js",
   "bin": "bin.js", 
   "author": "TugaZ",
-  "license": "MIT"
+  "license": "MIT",
+  "pkg": {
+    "assets": [
+      "node_modules/zwift-mobile-api/src/zwiftMessages.proto"
+    ]
+  }
 }

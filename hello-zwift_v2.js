@@ -667,7 +667,7 @@ module.exports = function(confFile, httpFile) {
 	  console.log('unhandledRejection', error.message);
 	});
 
-	const content = fs.readFileSync(__dirname + '/'+httpFile, 'utf8');
+	const content = fs.readFileSync(httpFile, 'utf8');
 
 	const httpServer = http.createServer((req, res) => {
 	  res.setHeader('Content-Type', 'text/html');
