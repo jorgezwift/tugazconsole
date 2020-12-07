@@ -273,7 +273,7 @@
 							
 						//$('#riderorder').clear();
 						var riderorder_content = "";
-						for(var iorder = 0; iorder<content.tugaZ.blob.riderorder.length; iorder++ ){
+						for(var iorder = 0; iorder<content.tugaZ.blob.riderorder.length && iorder < 6; iorder++ ){
 							var order_el = "h6";
 							if(iorder==0){
 								order_el = 'h1';
@@ -284,9 +284,9 @@
 							}
 							
 							if(iorder==0){
-								riderorder_content = riderorder_content+'<'+order_el+'>&#x1F680;'+content.tugaZ.blob.riderorder[(iorder+inner_order)%6]+'&#x1F680;</'+order_el+'>';
+								riderorder_content = riderorder_content+'<'+order_el+'>&#x1F680;'+content.tugaZ.blob.riderorder[(iorder+inner_order)%content.tugaZ.blob.riderorder.length]+'&#x1F680;</'+order_el+'>';
 							}else
-								riderorder_content = riderorder_content+'<'+order_el+'>'+content.tugaZ.blob.riderorder[(iorder+inner_order)%6]+'</'+order_el+'>';
+								riderorder_content = riderorder_content+'<'+order_el+'>'+content.tugaZ.blob.riderorder[(iorder+inner_order)%content.tugaZ.blob.riderorder.length]+'</'+order_el+'>';
 							
 						}
 						$('#riderorder').html(riderorder_content);
