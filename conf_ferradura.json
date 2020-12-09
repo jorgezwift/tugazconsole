@@ -1,0 +1,118 @@
+{
+	"ip": "192.168.10.7",
+	"port": 3000,
+	"user": "_zwift_user_",
+	"pwd": "_zwift_pass_",
+	
+	"user_is_rider": true,
+	"user_zid": "416001",
+	
+	"map": "greater_london",
+	"start_time": "190000",
+	
+	"team_leader": "396552",
+	
+	"turn_timer_active": false,
+	"turns_sequence_name": [],
+	
+	"riders": [	
+		{
+			"zid": 416001,
+			"name": "J. Carvalho",
+			"weight": 75,
+			"active": true
+		},
+		{
+			"zid": 1471758,
+			"name": "J. Nunes",
+			"weight": 79,
+			"active": true
+		},
+		{
+			"zid": 256089,
+			"name": "J. Inocentes",
+			"weight": 76,
+			"active": true
+		},
+		{
+			"zid": 396552,
+			"name": "R. M. Abrantes",
+			"weight": 69,
+			"active": true
+		},
+		{
+			"zid": 489763,
+			"name": "P. Pinheiro",
+			"weight": 80,
+			"active": true
+		},
+		{
+			"zid": 344198,
+			"name": "P. Borlido",
+			"weight": 69,
+			"active": true
+		},
+		{
+			"zid": 2147478,
+			"name": "A. Barbosa",
+			"weight": 62,
+			"active": true
+		},
+		{
+			"zid": 1815876,
+			"name": "N. Pinto",
+			"weight": 70,
+			"active": true
+		}
+	],
+	"other_teams": [
+		{
+			"team_leader": 99429,
+			"name": "OTR Blur", 
+			"active": true
+		},
+		{
+			"team_leader": 90946,
+			"name": "dPAC",
+			"active": true
+		},
+		{
+			"team_leader": 2667469,
+			"name": "Los Torpedos",
+			"active": false
+		},
+		{
+			"team_leader": 918670,
+			"name": "C-GEN Gulls",
+			"active": true
+		},
+		{
+			"team_leader": 99825,
+			"name": "OMG",
+			"active": true
+		},
+		{
+			"team_leader": 182715,
+			"name": "Los Torpedos",
+			"active": true
+		},
+		{
+			"team_leader": 735009,
+			"name": "CLS",
+			"active": true
+		},
+		{
+			"team_leader": 0,
+			"name": "INC",
+			"marks": [10,60,70,180,2000,2500,3000,3500,4000],
+			"active": true
+		}
+		{
+			"team_leader": 1,
+			"name": "DIRT",
+			"marks": [10,60,70,180,2000,2500,3000,3500,4000],
+			"active": true
+		}
+	]
+	
+}
