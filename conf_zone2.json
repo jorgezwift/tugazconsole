@@ -1,0 +1,76 @@
+{
+	"ip": "192.168.10.7",
+	"port": 3000,
+	"user": "_zwift_user_",
+	"pwd": "_zwift_pass_",
+	
+	"user_is_rider": false,
+	"user_zid": "416001",
+	
+	"map": "greater_london",
+	"start_time": "102000",
+	
+	"team_leader": "1567061",
+	
+	"turn_timer_active": false,
+	"turns_sequence_name": [],
+	
+	"riders": [	
+		{
+			"zid": 1567061,
+			"name": "A. Otstot",
+			"weight": 70,
+			"active": true
+		},
+		{
+			"zid": 1586989,
+			"name": "C. Pruitt",
+			"weight": 63,
+			"active": true
+		},
+		{
+			"zid": 146672,
+			"name": "B. Galambos",
+			"weight": 71,
+			"active": true
+		},
+		{
+			"zid": 64351,
+			"name": "J. Wilson",
+			"weight": 74,
+			"active": true
+		},
+		{
+			"zid": 462877,
+			"name": "J. Duke",
+			"weight": 78,
+			"active": true
+		},
+		{
+			"zid": 541854,
+			"name": "H. Guay",
+			"weight": 74,
+			"active": true
+		},
+		{
+			"zid": 36916,
+			"name": "J. Anthony",
+			"weight": 77,
+			"active": true
+		}
+	],
+	"other_teams": [
+		{
+			"team_leader": 1525003,
+			"name": "EVO", 
+			"active": true
+		},
+    
+		{
+			"team_leader": 2096914,
+			"name": "Herd", 
+			"active": true
+		},
+	]
+	
+}
