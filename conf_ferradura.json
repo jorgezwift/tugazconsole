@@ -109,15 +109,21 @@
 		},
 		
 		{
-			"team_leader": 0,
+			"team_leader": 184766,
 			"name": "INC",
-			"marks": [10,60,70,180,2000,2500,3000,3500,4000],
+			"marks": [],
 			"active": true
-		}
+		},
+		{
+			"team_leader": 0,
+			"name": "EVO",
+			"marks": [223,447,749,973,1209,1506,1730,1963,2206],
+			"active": true
+		},		
 		{
 			"team_leader": 1,
-			"name": "DIRT",
-			"marks": [10,60,70,180,2000,2500,3000,3500,4000],
+			"name": "RELENTELESS",
+			"marks": [230,458,760,987,1224,1519,1746,1978,2221],
 			"active": true
 		}
 	]
