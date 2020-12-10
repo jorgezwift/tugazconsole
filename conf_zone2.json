@@ -57,6 +57,12 @@
 			"name": "J. Anthony",
 			"weight": 77,
 			"active": true
+		},
+		{
+			"zid": 135104,
+			"name": "J. ONeill",
+			"weight": 78,
+			"active": true
 		}
 	],
 	"other_teams": [
@@ -66,6 +72,16 @@
 			"active": true
 		},
     
+		{
+			"team_leader": 1106370,
+			"name": "DIRT D", 
+			"active": true
+		},
+		{
+			"team_leader": 226769,
+			"name": "Steamers E.", 
+			"active": true
+		},
 		{
 			"team_leader": 2096914,
 			"name": "Herd", 
