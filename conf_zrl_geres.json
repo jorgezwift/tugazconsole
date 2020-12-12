@@ -1,0 +1,131 @@
+{
+	"ip": "192.168.10.7",
+	"port": 3000,
+	"user": "_zwift_user_",
+	"pwd": "_zwift_pass_",
+	
+	"user_is_rider": true,
+	"user_zid": "181509",
+	
+	"map": "tick_tock",
+	"start_time": "181500",
+	
+	"team_leader": "546068",
+	"team_class": "latte",
+	
+	"turn_timer_active": true,
+	"turns_sequence_name": ["N. Machado","P. Rodrigues","J. Caldeira","P. Miguel","S. Agostinho","P. Domingues"],
+	
+	"riders": [	
+		
+		{
+			"zid": 1399453,
+			"name": "P. Domingues",
+			"weight": 79,
+			"active": true
+		},
+		{
+			"zid": 194741,
+			"name": "S. Agostinho",
+			"weight": 70,
+			"active": true
+		},
+		
+		{
+			"zid": 546068,
+			"name": "P. Miguel",
+			"weight": 88,
+			"active": true
+		},
+		{
+			"zid": 181509,
+			"name": "J. Caldeira",
+			"weight": 74,
+			"active": true
+		},
+
+		{
+			"zid": 336221,
+			"name": "P. Rodrigues",
+			"weight": 80,
+			"active": true
+		},
+		{
+			"zid": 1798501,
+			"name": "N. Machado",
+			"weight": 84,
+			"active": true
+		},
+		{
+			"zid": 2147478,
+			"name": "A. Barbosa",
+			"weight": 62,
+			"active": true
+		},
+		{
+			"zid": 1815876,
+			"name": "N. Pinto",
+			"weight": 70,
+			"active": true
+		}
+	],
+	"other_teams": [
+		{
+			"team_leader": 2226346,
+			"name": "DIRT", 
+			"active": true
+		},
+		{
+			"team_leader": 50281,
+			"name": "SZ", 
+			"active": true
+		},
+		{
+			"team_leader": 160576,
+			"name": "Innovation", 
+			"active": true
+		},
+		{
+			"team_leader": 393244,
+			"name": "England CC", 
+			"active": true
+		},
+		{
+			"team_leader": 577235,
+			"name": "BZR", 
+			"active": true
+		},
+		{
+			"team_leader": 86467,
+			"name": "Kirch.", 
+			"active": true
+		},
+		{
+			"team_leader": 1388839,
+			"name": "WTRL", 
+			"active": true
+		},
+		{
+			"team_leader": 1823572,
+			"name": "PetaZ", 
+			"active": true
+		},
+		{
+			"team_leader": 1298928,
+			"name": "C-GEN", 
+			"active": true
+		},
+		{
+			"team_leader": 813875,
+			"name": "WKG", 
+			"active": true
+		},
+		{
+			"team_leader": 69023,
+			"name": "ZESP", 
+			"active": true
+		}
+	
+	]
+	
+}

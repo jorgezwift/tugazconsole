@@ -38,6 +38,7 @@
 		var chartPowerRiders;
 		var chartHeadDistRiders;
 		var chartHeadPower;
+		var last_comm_obj = {};
 		
 		var presets = {
 			red: 'rgb(255, 99, 132)',
@@ -107,48 +108,91 @@
     arr[first_Index] = arr[second_Index];
     arr[second_Index] = temp;
 }
+
+	function positionFormatter(value, row, index) {
+	
+		var inner = "";
+		value.forEach(
+			function(item, indice){
+				
+				var valWKNE = Math.round(item*17);
+				console.log(item +" : "+indice);
+				if(indice==0){
+					var st = '<rect x="'+indice*10+'" y="'+(17-valWKNE)+'" height="'+(valWKNE)+'" width="10" fill="#000000"></rect>';
+					inner = inner + ""+st;
+				}else if(indice==1){
+					var st = '<rect x="'+indice*10+'" y="'+(17-valWKNE)+'" height="'+(valWKNE)+'" width="10" fill="red"></rect>';
+					inner = inner + ""+st;
+				}else if(indice==2 || indice==3){
+					var st = '<rect x="'+indice*10+'" y="'+(17-valWKNE)+'" height="'+(valWKNE)+'" width="10" fill="#FFA500"></rect>';
+					inner = inner + ""+st;
+				}else if(indice==4 || indice==5){
+					var st = '<rect x="'+indice*10+'" y="'+(17-valWKNE)+'" height="'+(valWKNE)+'" width="10" fill="#0000FF"></rect>';
+					inner = inner + ""+st;
+				}else{
+					var st = '<rect x="'+indice*10+'" y="'+(17-valWKNE)+'" height="'+(valWKNE)+'" width="10" fill="green"></rect>';
+					inner = inner + ""+st; 
+				}
+			});
+	
+		var a;
+			a = [
+					'<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="chart" height="17" width="80" role="img" style="margin-top:-6px;margin-bottom:-6px;">',
+					'<g class="bar" >',
+						inner,
+					'</g>',
+					'</svg>'
+				];
+			
+		return a.join('');
+		
+	}
+	
 	
 	function wattFormatter(value, row, index) {
-    
-    
-        /*<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="chart" height="17" width="80" role="img">
-          <g class="bar" >
-            <rect x="0" y="10" height="10" width="2"></rect>
-              <rect x="2" y="6" height="14" width="2"></rect>
-             <rect x="4" y="6" height="14" width="2"></rect>
-              <rect x="6" y="10" height="10" width="2"></rect>
-              <rect x="8" y="9" height="11" width="2"></rect>
-            <rect x="10" y="10" height="10" width="2"></rect>
-              <rect x="12" y="17" height="3" width="2"></rect>
-             <rect x="14" y="18" height="2" width="2"></rect>
-          </g>
-        </svg>*/
-    
     
         var inner = "";
         value.forEach(
             function(item, indice){
                 
-                var valWK = item.power/row.w;
-                var valWKN = valWK-3.5;
+				var min_range = 3;
+				var max_range = 5.5;
+				var eff_level1 = 4.5;
+				var eff_level2 = 4.2;
+				var eff_level3 = 4;
+				if(row.team_class == "latte"){
+					min_range = 2.5;
+					max_range = 4.5;
+					eff_level1 = 4.2;
+					eff_level2 = 4;
+					eff_level3 = 3.5;
+                }else if(row.team_class == "espresso"){
+					min_range = 3.5;
+					max_range = 6;
+					eff_level1 = 5;
+					eff_level2 = 4.5;
+					eff_level3 = 4.2;
+				}	
+				var valWK = item.power/row.w;
+                var valWKN = valWK-min_range;
                 if(valWKN<0)
                     valWKN = 0.125;
-                if(valWKN>2.5)
-                    valWKN = 2.5;
+                if(valWKN>(max_range-min_range))
+                    valWKN = (max_range-min_range);
                 
-                var valWKNE = Math.round((valWKN*20)/2.5);
+                var valWKNE = Math.round((valWKN*17)/(max_range-min_range));
                 
-                if(item.power/row.w>4.5){
-                    var st = '<rect x="'+indice*4+'" y="'+(20-valWKNE)+'" height="'+(valWKNE)+'" width="4" fill="#000000"></rect>';
+                if(item.power/row.w>eff_level1){
+                    var st = '<rect x="'+indice*4+'" y="'+(17-valWKNE)+'" height="'+(valWKNE)+'" width="4" fill="#000000"></rect>';
                     inner = inner + ""+st;
-                }else if(item.power/row.w>4.2){
-                    var st = '<rect x="'+indice*4+'" y="'+(20-valWKNE)+'" height="'+(valWKNE)+'" width="4" fill="red"></rect>';
+                }else if(item.power/row.w>eff_level2){
+                    var st = '<rect x="'+indice*4+'" y="'+(17-valWKNE)+'" height="'+(valWKNE)+'" width="4" fill="red"></rect>';
                     inner = inner + ""+st;
-                }else if(item.power/row.w>4){
-                    var st = '<rect x="'+indice*4+'" y="'+(20-valWKNE)+'" height="'+(valWKNE)+'" width="4" fill="yellow"></rect>';
+                }else if(item.power/row.w>eff_level3){
+                    var st = '<rect x="'+indice*4+'" y="'+(17-valWKNE)+'" height="'+(valWKNE)+'" width="4" fill="yellow"></rect>';
                     inner = inner + ""+st;
                 }else{
-                    var st = '<rect x="'+indice*4+'" y="'+(20-valWKNE)+'" height="'+(valWKNE)+'" width="4" fill="green"></rect>';
+                    var st = '<rect x="'+indice*4+'" y="'+(17-valWKNE)+'" height="'+(valWKNE)+'" width="4" fill="green"></rect>';
                     inner = inner + ""+st;
                 }
             });
@@ -248,6 +292,9 @@
 						stack: false
 					});
 			}else{
+				
+				last_comm_obj = content;
+			
 				//RIDER ORDER
 				if(content.tugaZ.blob.riderorder_active){
 					$('#riderorder_div').show();
@@ -353,9 +400,9 @@
 							formatter: wattFormatter
 						});
 						columnsR.push({
-							title: 'Leeching',
-							field: 'timeinback',
-							formatter: timeFormatter
+							title: 'Position',
+							field: 'position',
+							formatter: positionFormatter
 						});
 					
 					
@@ -629,6 +676,10 @@
 						}else
 							rider.p20m = 0;						
 						
+						for(var posi = 0 ; posi < rider.position.length ; posi++){
+							rider.position[posi] = rider.position[posi]/content.tugaZ.blob.total_time;
+						}
+						
 						
 						rowsR.push({
 							name: rider.name,
@@ -637,6 +688,8 @@
 							w: rider.weigth,
 							avgpower: rider.p20m+" w/kg",
 							wattchrono: rider.power30s,
+							position: rider.position,
+							team_class: content.tugaZ.blob.team_class,
 							powerinfront: Math.round(rider.powerinfront*100/rider.weigth)/100+" w/kg",
 							timeinback: rider.timeinback/1000
 						});
@@ -734,11 +787,6 @@
 				var rows = [];
 				
 				var WTRLTeamsTemp = { ...content.WTRLTiming };   
-				 
-				//var lll = WTRLTeamsTemp['team416001'].marks.length;
-				//if(WTRLTeamsTemp['team416001'].marks.length>0){
-				//var lll = WTRLTeamsTemp['team489763'].marks.length;
-				//if(WTRLTeamsTemp['team489763'].marks.length>0){
 				var lll = WTRLTeamsTemp['team'+content.tugaZ.blob.team_leader].marks.length;
 				if(WTRLTeamsTemp['team'+content.tugaZ.blob.team_leader].marks.length>0){
 					var line_array = [];

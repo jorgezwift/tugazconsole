@@ -35,6 +35,7 @@ module.exports = function(confFile, httpFile) {
 
 	var tugaTeam = {
 		team_leader: config.team_leader,
+		team_class: config.team_class,
 		rider: {
 			zid: 0		
 		},
@@ -479,7 +480,8 @@ module.exports = function(confFile, httpFile) {
 			var frontid = 0;
 			var frontdistance = 0;
 			var originalfrontdistance = 0;
-			
+			var position_array = [];
+		
 			for(var key in tugaZRiders){
 				var rider = tugaZRiders[key];
 				if(rider.speed>0){
@@ -508,6 +510,19 @@ module.exports = function(confFile, httpFile) {
 							frontid = rider.zid;
 							frontdistance = comparable;
 						}
+						
+						var added = false;
+						for(var posi = 0;posi<position_array.length;posi++){
+							if(comparable>position_array[posi].frontdistance){
+								added = true;
+								position_array.splice(posi, 0, {"frontdistance":frontdistance,"zid":rider.zid});
+								break;
+							}
+						}
+						if(!added)
+							position_array.splice(position_array.length, 0, {"frontdistance":frontdistance,"zid":rider.zid});
+								
+						
 
 					}else{
 						rider.ko = true;
@@ -529,6 +544,16 @@ module.exports = function(confFile, httpFile) {
 												(highest_time
 												-
 												(tugaTeam.startTime+tugaTeam.time));
+						}
+						
+						//UPDATE POSITIONS
+						for(var posi = 0;posi<position_array.length;posi++){
+							if(position_array[posi].zid == rider.zid){
+								rider.position[posi] = rider.position[posi] +
+												(highest_time
+												-
+												(tugaTeam.startTime+tugaTeam.time));
+							}
 						}
 					}
 				}
@@ -629,22 +654,24 @@ module.exports = function(confFile, httpFile) {
 
 	const interval = setInterval(function() {
 	   
+   	var today = new Date();
+	var h = today.getHours();
+	if(h<10)
+		h="0"+h;
+	var m = today.getMinutes();
+	if(m<10)
+		m="0"+m;
+	var s = today.getSeconds();
+	if(s<10)
+		s="0"+s;
+	var time = h + "" + m + "" + s;
+	//console.log(time);
+	if(time>startTime){
 	   for(var key in WTRLTeams){
 			var team = WTRLTeams[key];
 			if(team.active && !team.complete){
-				var today = new Date();
-				var h = today.getHours();
-				if(h<10)
-					h="0"+h;
-				var m = today.getMinutes();
-				if(m<10)
-					m="0"+m;
-				var s = today.getSeconds();
-				if(s<10)
-					s="0"+s;
-				var time = h + "" + m + "" + s;
-		
-				if(time>startTime){
+				//console.log("get: "+team.name);
+	
 					world.riderStatus(team.zid).then(statuss => {
 						statuss.roadID=0;
 						statuss.world=1;

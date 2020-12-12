@@ -1,0 +1,112 @@
+{
+	"ip": "192.168.10.7",
+	"port": 3000,
+	"user": "_zwift_user_",
+	"pwd": "_zwift_pass_",
+	
+	"user_is_rider": false,
+	"user_zid": "416001",
+	
+	"map": "tick_tock",
+	"start_time": "181500",
+	
+	"team_leader": "1471758",
+	"team_class": "frappe",
+	
+	"turn_timer_active": false,
+	"turns_sequence_name": ["J. Carvalho", "J. Nunes"],
+	
+	"riders": [	
+		{
+			"zid": 1471758,
+			"name": "J. Nunes",
+			"weight": 79,
+			"active": true
+		},
+		{
+			"zid": 589694,
+			"name": "André S.",
+			"weight": 83,
+			"active": true
+		},
+		{
+			"zid": 1453182,
+			"name": "F. Costa",
+			"weight": 68,
+			"active": true
+		},
+		{
+			"zid": 1556920,
+			"name": "Zé Pereira",
+			"weight": 74,
+			"active": true
+		},
+		{
+			"zid": 489763,
+			"name": "P. Pinheiro",
+			"weight": 79,
+			"active": true
+		},
+		{
+			"zid": 1176802,
+			"name": "A. Pereira",
+			"weight": 73,
+			"active": false
+		},
+		{
+			"zid": 899397,
+			"name": "N. Mendez",
+			"weight": 67,
+			"active": true
+		}						
+	
+	],
+	"other_teams": [
+		{
+			"team_leader": 1497525,
+			"name": "BMPRO", 
+			"active": true
+		},
+		{
+			"team_leader": 269633,
+			"name": "BZR Lions", 
+			"active": true
+		},
+		{
+			"team_leader": 854658,
+			"name": "DBR", 
+			"active": true
+		},
+		{
+			"team_leader": 1403712,
+			"name": "SZ Mimer", 
+			"active": true
+		},
+		{
+			"team_leader": 419595,
+			"name": "SZ Heim", 
+			"active": true
+		},
+		{
+			"team_leader": 1088305,
+			"name": "EVO", 
+			"active": true
+		},
+		{
+			"team_leader": 1398066,
+			"name": "Kirch", 
+			"active": true
+		},
+		{
+			"team_leader": 621940,
+			"name": "Wolfpack", 
+			"active": true
+		},
+		{
+			"team_leader": 135363,
+			"name": "C-GEN", 
+			"active": true
+		}
+	]
+	
+}

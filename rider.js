@@ -28,6 +28,7 @@ class Rider {
 		this.p10m = 0;
 		this.p20m = 0;
 		this.active = true;
+		this.position = [0,0,0,0,0,0,0,0];
 
 	 }
   name() {

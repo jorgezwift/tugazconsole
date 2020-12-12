@@ -11,6 +11,7 @@
 	"start_time": "181500",
 	
 	"team_leader": "416001",
+	"team_class": "frappe",
 	
 	"turn_timer_active": true,
 	"turns_sequence_name": ["J. Carvalho", "J. Nunes"],
