@@ -1,7 +1,8 @@
 ## TugaZ Console
 
-**$$Zwift Client must be running in local machine**  
-**$$Logged in rider must be participating on the TTT of "Fan viewing" a team rider**  
+**$$ Zwift Client must be running in local machine**  
+**$$ Logged in rider must be participating on the TTT of "Fan viewing" a team rider**  
+**$$ npcap needed (https://nmap.org/npcap/)**  
 
 ## Configuration Files
 Sample config file located at conf.json  
