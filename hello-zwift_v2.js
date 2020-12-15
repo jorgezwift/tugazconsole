@@ -436,7 +436,7 @@ module.exports = function(confFile, httpFile) {
 				var packet_time = playerState.worldTime.toNumber();
 					if(rider.worldTime>=packet_time)
 						return;	
-				if(time != 0){
+				if(playerState.time != 0){
 					updateRiders(playerState);
 				}
 		  }  
