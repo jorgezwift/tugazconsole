@@ -1,0 +1,95 @@
+{
+	"ip": "192.168.10.7",
+	"port": 3000,
+	"user": "_zwift_user_",
+	"pwd": "_zwift_pass_",
+	
+	"user_is_rider": false,
+	"user_zid": "416001",
+	
+	"map": "tick_tock",
+	"start_time": "181500",
+	
+	"team_leader": "344198",
+	"team_class": "espresso",
+	
+	"turn_timer_active": false,
+	"turns_sequence_name": ["J. Carvalho", "J. Nunes"],
+	
+	"riders": [	
+		{
+			"zid": 344198,
+			"name": "P. Borlido",
+			"weight": 69,
+			"active": true
+		},
+		{
+			"zid": 272271,
+			"name": "Rafael M.",
+			"weight": 68,
+			"active": true
+		},
+		{
+			"zid": 2147478,
+			"name": "A. Barbosa",
+			"weight": 62,
+			"active": true
+		},
+		{
+			"zid": 159892,
+			"name": "J. Sousa",
+			"weight": 66,
+			"active": true
+		},
+		{
+			"zid": 416001,
+			"name": "J. Carvalho",
+			"weight": 75,
+			"active": true
+		}						
+	
+	],
+	"other_teams": [
+		{
+			"team_leader": 910390,
+			"name": "BikeBeat", 
+			"active": true
+		},
+		{
+			"team_leader": 1762483,
+			"name": "BRC", 
+			"active": true
+		},
+		{
+			"team_leader": 47583,
+			"name": "Broom", 
+			"active": true
+		},
+		{
+			"team_leader": 1762522,
+			"name": "JeS", 
+			"active": true
+		},
+		{
+			"team_leader": 186594,
+			"name": "NLR", 
+			"active": true
+		},
+		{
+			"team_leader": 1360468,
+			"name": "R3R", 
+			"active": true
+		},
+		{
+			"team_leader": 801900,
+			"name": "TR Junkies", 
+			"active": true
+		},
+		{
+			"team_leader": 160696,
+			"name": "UCC", 
+			"active": true
+		}
+	]
+	
+}
