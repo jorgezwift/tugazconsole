@@ -4,11 +4,11 @@
 	"user": "_zwift_user_",
 	"pwd": "_zwift_pass_",
 	
-	"user_is_rider": true,
+	"user_is_rider": false,
 	"user_zid": "416001",
 	
-	"map": "greater_london",
-	"start_time": "190000",
+	"map": "sand_n_sequoias",
+	"start_time": "193200",
 	
 	"team_leader": "396552",
 	"team_class": "espresso",
@@ -68,65 +68,99 @@
 	],
 	"other_teams": [
 		{
-			"team_leader": 99429,
-			"name": "OTR Blur", 
-			"active": true
+			"team_leader": 794409,
+			"name": "ZSUN - H", 
+			"active": true,
+			"startTime": "091500" 
 		},
 		{
-			"team_leader": 90946,
-			"name": "dPAC",
-			"active": true
+			"team_leader": 1525003,
+			"name": "EVO Warriors",
+			"active": true,
+			"startTime": "112000"
 		},
 		{
-			"team_leader": 2667469,
-			"name": "Los Torpedos",
-			"active": false
+			"team_leader": 1106370,
+			"name": "DIRT Diggler",
+			"active": true,
+			"startTime": "112000"
 		},
 		{
-			"team_leader": 918670,
-			"name": "C-GEN Gulls",
-			"active": true
+			"team_leader": 1728644,
+			"name": "Eat DIRT Too",
+			"active": true,
+			"startTime": "112000"
 		},
 		{
-			"team_leader": 99825,
-			"name": "OMG",
-			"active": true
+			"team_leader": 483526,
+			"name": "DIRTY St. Too",
+			"active": true,
+			"startTime": "112000"
 		},
 		{
-			"team_leader": 182715,
-			"name": "Los Torpedos",
-			"active": true
+			"team_leader": 956654,
+			"name": "ZSUN",
+			"active": true,
+			"startTime": "191000"
 		},
 		{
-			"team_leader": 735009,
-			"name": "CLS",
-			"active": true
+			"team_leader": 1445274,
+			"name": "nopinz R3R",
+			"active": true,
+			"startTime": "191000"
 		},
 		
 		{
-			"team_leader": 1354,
-			"name": "ENGine",
-			"active": true
-		},
-		
-		{
-			"team_leader": 184766,
-			"name": "INC",
-			"marks": [],
-			"active": true
+			"team_leader": 2867976,
+			"name": "PetaZ",
+			"active": true,
+			"startTime": "191000"
 		},
 		{
-			"team_leader": 0,
+			"team_leader": 983328,
+			"name": "WeZ",
+			"active": true,
+			"startTime": "191000"
+		},
+		{
+			"team_leader": 1326335,
+			"name": "TFC",
+			"active": true,
+			"startTime": "191000"
+		},
+		{
+			"team_leader": 360484,
+			"name": "CRYO",
+			"active": true,
+			"startTime": "191000"
+		},
+		{
+			"team_leader": 230475,
+			"name": "VCRT",
+			"active": true,
+			"startTime": "191000"
+		},
+		{
+			"team_leader": 2580,
+			"name": "Vision",
+			"active": true,
+			"startTime": "191000"
+		},
+		{
+			"team_leader": 79239,
+			"name": "SloZL",
+			"active": true,
+			"startTime": "191000"
+		},
+		{
+			"team_leader": 260720,
 			"name": "EVO",
-			"marks": [223,447,749,973,1209,1506,1730,1963,2206],
-			"active": true
-		},		
-		{
-			"team_leader": 1,
-			"name": "RELENTELESS",
-			"marks": [230,458,760,987,1224,1519,1746,1978,2221],
-			"active": true
+			"active": true,
+			"startTime": "191000"
 		}
+		
+		
+		
 	]
 	
 }
