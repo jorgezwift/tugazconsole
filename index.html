@@ -676,8 +676,13 @@
 						}else
 							rider.p20m = 0;						
 						
+						var mainposi = 1;
 						for(var posi = 0 ; posi < rider.position.length ; posi++){
-							rider.position[posi] = rider.position[posi]/content.tugaZ.blob.total_time;
+							if(rider.position[posi] > mainposi)
+								mainposi = rider.position[posi];
+						}
+						for(var posi = 0 ; posi < rider.position.length ; posi++){
+							rider.position[posi] = rider.position[posi]/mainposi;
 						}
 						
 						
