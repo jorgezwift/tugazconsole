@@ -1,0 +1,46 @@
+{
+	"distance": 42800,
+	"reverse": false,
+	"lines": [
+		{
+			"name": "Start",
+			"roadTime": 1
+		},
+		{
+			"name": "5km",
+			"roadTime": 5000
+		},
+		{
+			"name": "10km",
+			"roadTime": 10000
+		},
+		{
+			"name": "15km",
+			"roadTime": 15000
+		},
+		{
+			"name": "20km",
+			"roadTime": 20000
+		},
+		{
+			"name": "25km",
+			"roadTime": 25000
+		},
+		{
+			"name": "30km",
+			"roadTime": 30000
+		},
+		{
+			"name": "34km",
+			"roadTime": 34000
+		},
+		{
+			"name": "38km",
+			"roadTime": 38000
+		},
+		{
+			"name": "End",
+			"roadTime": 42800
+		}
+	]
+}
