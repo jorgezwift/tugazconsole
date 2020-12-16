@@ -59,16 +59,21 @@ module.exports = function(confFile, httpFile) {
 
 	//BUILD TEAMS
 	var WTRLTeams = {};
-	WTRLTeams['team'+config.team_leader] = new Team(config.team_leader, "TugaZ", true);
+	WTRLTeams['team'+config.team_leader] = new Team(config.team_leader, "TugaZ", true, startTime);
 	for (var i = 0; i < config.other_teams.length; i++) {   
 
 		var tObj = config.other_teams[i];
 		if(tObj.active){
-			var tTeam = new Team(tObj.team_leader, tObj.name, tObj.active);
+			var startT = startTime;
+			if(typeof tObj.startTime != 'undefined'){
+				startT = tObj.startTime;
+			}
+			var tTeam = new Team(tObj.team_leader, tObj.name, tObj.active, startT);
 			if(typeof tObj.marks != 'undefined'){
 				tTeam.marks = tObj.marks;
 				tTeam.complete = true;
 			}
+			
 			console.log(tObj.team_leader);
 			WTRLTeams['team'+tObj.team_leader] = tTeam;
 		}
@@ -666,12 +671,11 @@ module.exports = function(confFile, httpFile) {
 		s="0"+s;
 	var time = h + "" + m + "" + s;
 	//console.log(time);
-	if(time>startTime){
-	   for(var key in WTRLTeams){
+		for(var key in WTRLTeams){
 			var team = WTRLTeams[key];
-			if(team.active && !team.complete){
+			if(time>team.startTime){
+				if(team.active && !team.complete){
 				//console.log("get: "+team.name);
-	
 					world.riderStatus(team.zid).then(statuss => {
 						statuss.roadID=0;
 						statuss.world=1;
