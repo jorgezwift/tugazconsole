@@ -520,12 +520,12 @@ module.exports = function(confFile, httpFile) {
 						for(var posi = 0;posi<position_array.length;posi++){
 							if(comparable>position_array[posi].frontdistance){
 								added = true;
-								position_array.splice(posi, 0, {"frontdistance":frontdistance,"zid":rider.zid});
+								position_array.splice(posi, 0, {"frontdistance":comparable,"zid":rider.zid});
 								break;
 							}
 						}
 						if(!added)
-							position_array.splice(position_array.length, 0, {"frontdistance":frontdistance,"zid":rider.zid});
+							position_array.splice(position_array.length, 0, {"frontdistance":comparable,"zid":rider.zid});
 								
 						
 
