@@ -6,8 +6,8 @@ class Rider {
 					
 		this.zid = zid;
 		this.name = name;
-		if(this.name.length > 14)
-			this.name = this.name.substring(0,13) + ".";
+		if(this.name.length > 17)
+			this.name = this.name.substring(0,16) + ".";
 		this.weigth = weight;
 		this.ftp = ftp;
 		this.distance = 0;

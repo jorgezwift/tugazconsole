@@ -9,6 +9,7 @@ const https = require('https');
 const iomodule = require('socket.io');
 const cheerio = require('cheerio');
 var ip = require("ip");
+const he = require('he');
 
 module.exports = function(confFile, httpFile) {
 	let rawdata = fs.readFileSync(confFile);
@@ -94,7 +95,7 @@ module.exports = function(confFile, httpFile) {
 			if(rObj.active){
 				var tRider = new Rider(
 						rObj.zid, 
-						rObj.name, 
+						he.decode(rObj.name), 
 						rObj.weight,
 						rObj.ftp);
 				tugaZRiders['rider'+rObj.zid] = tRider;
