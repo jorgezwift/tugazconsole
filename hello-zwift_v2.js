@@ -720,7 +720,7 @@ module.exports = function(confFile, httpFile) {
 		  filee = "/"+httpFile;
 	  }
 	  console.log("req.url: "+filee);
-	  fs.readFile(__dirname + filee, function (err,data) {
+	  fs.readFile("./"+filee, function (err,data) {
 		if (err) {
 		  res.writeHead(404);
 		  console.log("ERROR: "+JSON.stringify(err))
