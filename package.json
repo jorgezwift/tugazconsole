@@ -3,12 +3,19 @@
   "version": "0.0.1",
   "description": "WTRL TTT Console",
   "main": "hello-zwift_v2.js",
-  "bin": "bin.js", 
+  "bin": "bin.js",
   "author": "TugaZ",
   "license": "MIT",
   "pkg": {
     "assets": [
       "node_modules/zwift-mobile-api/src/zwiftMessages.proto"
     ]
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "ip": "^1.1.5",
+    "socket.io": "^2.3.0",
+    "zwift-line-monitor": "^0.1.8",
+    "zwift-packet-monitor": "^0.1.5"
   }
 }

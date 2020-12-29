@@ -6,6 +6,8 @@ class Rider {
 					
 		this.zid = zid;
 		this.name = name;
+		if(this.name.length > 14)
+			this.name = this.name.substring(0,13) + ".";
 		this.weigth = weight;
 		this.ftp = ftp;
 		this.distance = 0;
@@ -32,8 +34,8 @@ class Rider {
 
 	 }
   name() {
-    if(this.name.length > 20)
-		return this.name.substring(0,19) + ".";
+    if(this.name.length > 14)
+		return this.name.substring(0,13) + ".";
 	return this.name;
 	//return `${this.constructor.name}`;
   }

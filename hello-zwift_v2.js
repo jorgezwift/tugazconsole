@@ -5,14 +5,18 @@ const Rider = require('./rider');
 const Team = require('./team');
 const fs = require('fs');
 const http = require('http');
+const https = require('https');
 const iomodule = require('socket.io');
+const cheerio = require('cheerio');
+var ip = require("ip");
 
 module.exports = function(confFile, httpFile) {
 	let rawdata = fs.readFileSync(confFile);
-	let config = JSON.parse(rawdata);
+	var config = JSON.parse(rawdata);
 
 	var ifface = config.ip;
-	const monitor = new ZwiftPacketMonitor(ifface)
+	
+	const monitor = new ZwiftPacketMonitor(ip.address())
 	const monitorLine = new ZwiftLineMonitor();
 	var account = new ZwiftAccount(config.user, config.pwd);
 
@@ -59,40 +63,46 @@ module.exports = function(confFile, httpFile) {
 
 	//BUILD TEAMS
 	var WTRLTeams = {};
-	WTRLTeams['team'+config.team_leader] = new Team(config.team_leader, "TugaZ", true, startTime);
-	for (var i = 0; i < config.other_teams.length; i++) {   
+	function buildTeamsConfig(){
+		WTRLTeams = {};
+		WTRLTeams['team'+config.team_leader] = new Team(config.team_leader, "TugaZ", true, startTime);
+		for (var i = 0; i < config.other_teams.length; i++) {   
 
-		var tObj = config.other_teams[i];
-		if(tObj.active){
-			var startT = startTime;
-			if(typeof tObj.startTime != 'undefined'){
-				startT = tObj.startTime;
+			var tObj = config.other_teams[i];
+			if(tObj.active){
+				var startT = startTime;
+				if(typeof tObj.startTime != 'undefined'){
+					startT = tObj.startTime;
+				}
+				var tTeam = new Team(tObj.team_leader, tObj.name, tObj.active, startT);
+				if(typeof tObj.marks != 'undefined'){
+					tTeam.marks = tObj.marks;
+					tTeam.complete = true;
+				}
+				
+				WTRLTeams['team'+tObj.team_leader] = tTeam;
 			}
-			var tTeam = new Team(tObj.team_leader, tObj.name, tObj.active, startT);
-			if(typeof tObj.marks != 'undefined'){
-				tTeam.marks = tObj.marks;
-				tTeam.complete = true;
-			}
-			
-			console.log(tObj.team_leader);
-			WTRLTeams['team'+tObj.team_leader] = tTeam;
 		}
 	}
-
+	buildTeamsConfig();
 	//BUILD TEAM ROSTER
 	var tugaZRiders = {};
-	for (var i = 0; i < config.riders.length; i++) {   
-		var rObj = config.riders[i];
-		if(rObj.active){
-			var tRider = new Rider(
-					rObj.zid, 
-					rObj.name, 
-					rObj.weight,
-					rObj.ftp);
-			tugaZRiders['rider'+rObj.zid] = tRider;
+	function buildTeamRosterConfig(){
+		tugaZRiders = {};
+		for (var i = 0; i < config.riders.length; i++) {   
+			var rObj = config.riders[i];
+			if(rObj.active){
+				var tRider = new Rider(
+						rObj.zid, 
+						rObj.name, 
+						rObj.weight,
+						rObj.ftp);
+				tugaZRiders['rider'+rObj.zid] = tRider;
+			}
 		}
 	}
-
+	buildTeamRosterConfig();
+	
 	monitorLine.addDistanceMark(100, currentMap[0].name, currentMap[0].roadTime);
 
 	for(var i = 1; i<currentMap.length; i++){
@@ -698,12 +708,36 @@ module.exports = function(confFile, httpFile) {
 	  console.log('unhandledRejection', error.message);
 	});
 
-	const content = fs.readFileSync(httpFile, 'utf8');
+	//const content = fs.readFileSync(httpFile, 'utf8');
 
 	const httpServer = http.createServer((req, res) => {
-	  res.setHeader('Content-Type', 'text/html');
+	  /*res.setHeader('Content-Type', 'text/html');
 	  res.setHeader('Content-Length', Buffer.byteLength(content));
-	  res.end(content);
+	  res.end(content);*/
+	  console.log("req.url: "+req.url);
+	  var filee = req.url;
+	  if(filee == '/'){
+		  filee = "/"+httpFile;
+	  }
+	  console.log("req.url: "+filee);
+	  fs.readFile(__dirname + filee, function (err,data) {
+		if (err) {
+		  res.writeHead(404);
+		  console.log("ERROR: "+JSON.stringify(err))
+		  res.end("ERROR - Someone is doing something wrong!");
+		  return;
+		}
+		res.setHeader('Content-Length', Buffer.byteLength(data));
+		if(req.url.endsWith(".html"))
+			res.setHeader('Content-Type', 'text/html');
+		else if(req.url.endsWith(".js"))
+			res.setHeader('Content-Type', 'text/javascript');
+		else if(req.url.endsWith(".css"))
+			res.setHeader('Content-Type', 'text/css');
+		
+		res.writeHead(200);
+		res.end(data);
+	  });
 	});
 
 	const io = iomodule(httpServer);
@@ -712,11 +746,312 @@ module.exports = function(confFile, httpFile) {
 	  console.log('connect');
 	  io.sockets.emit("zevent", { tugaZ: { blob: tugaTeam, riders: tugaZRiders}, distanceMarks: currentMap, WTRLTiming: WTRLTeams, 'ended': ended} );
 	});
+	
+	io.on('connect', socket => {
+	  console.log('connect');
+	  
+	  socket.on('message', function(msg){
+		console.log('received', msg);
+		var msgObj = JSON.parse(msg);
+		if(msgObj.action == 'build_conf'){
+			console.log("Starting Building Conf");
+			//https://www.zwiftpower.com/cache3/results/1326092_signups.json?_=1608417944711
+			socket.emit('info',{"ended":false,"msg":'Starting Building Conf'});
+			var domStr = "";
+			var teamFound = false;
+			var teamObj;
+			var WTRL_signedUpTeams = new Object; 
+			var WTRL_signedUpTeamTags = new Object; 
+			const request = https.get('https://www.wtrl.racing/ttt/TTT-Event.php?_='+Math.round(Math.random()*1000000), function(response) {
+			  response.on('data', (d) => {
+				console.log("WTRL Part Data Received");
+				domStr += d;
+				
+			  });
+			  response.on('end', () => {
+				const $ = cheerio.load(domStr);
+				console.log("WTRL DOM Loaded");
+				socket.emit('info',{"ended":false,'msg':'WTRL DOM Loaded'});
+				$('#reg_ttt tbody tr').each(function(i, tr){
+					console.log("Team Line: "+i);
+					var curTeam = new Object;
+					
+					var children = $(this).children('td').each(function(j, td){
+						//console.log("Line Column: "+j);
+						var td = $(this);
+						if(j==0){
+							console.log(td.text());
+							curTeam.zone=td.text();
+							
+						}else if(j==1){
+							
+							console.log(td.text());
+							curTeam.cl=td.text();
+						}else if(j==2){			
+							console.log(td.html());
+							curTeam.name=td.text();
+						}else if(j==4){						
+							console.log(td.html());
+							curTeam.tag=td.text();
+							if(curTeam.tag == msgObj.tag){
+								teamFound = true;
+								teamObj = curTeam;
+							}	
+						}else if(j==5){			
+							console.log(td.html());
+							curTeam.box=td.text();
+						}else if(j==6){
+							console.log(td.html());
+							var edate = td.html();
+							edate = edate.substring(edate.lastIndexOf("-")+1).trim();
+							var hourStr = "";
+							var pm = 0;
+							if(edate.indexOf("PM")>-1)
+								pm = 12;
+							edate = edate.substring(0, edate.indexOf(" ")).trim();
+							edateHour = edate.substring(0, edate.indexOf(":")).trim();
+							edateMinute = edate.substring(edate.indexOf(":")+1).trim();
+							
+							curTeam.startTime=""+(pm+parseInt(edateHour))+""+edateMinute+"00";
+							
+							console.log(curTeam.startTime);
+						}else if(j==7){
+							var linka = $(td).children('a');
+							var href1 = linka.attr('href');
+							var href2 = href1.substring(href1.lastIndexOf("/")+1);
+							console.log(href2);
+							curTeam.eid=href2;
+							if(true){
+								if(typeof WTRL_signedUpTeams[curTeam.cl] == 'undefined')
+									WTRL_signedUpTeams[curTeam.cl] = new Object;
+								if(typeof WTRL_signedUpTeams[curTeam.cl][curTeam.zone] == 'undefined'){
+									WTRL_signedUpTeams[curTeam.cl][curTeam.zone] = new Array;
+								}
+								WTRL_signedUpTeams[curTeam.cl][curTeam.zone].push(curTeam);
+								WTRL_signedUpTeamTags[curTeam.tag] = "valid";
+							}
+						}	
+					});	
+					console.log("--------");
+				});
+				
+				if(!teamFound){
+					socket.emit('info',{"ended":true,'msg':'WTRL Teams Processed. TugaZ tag not Found.'});
+				}else{
+					socket.emit('info',{"ended":false,'msg':'WTRL Teams Processed. Getting ZP info.'});
+					//Get ZP Info
+					var allDivs = [];
+					allDivs.push({
+						"eid" : WTRL_signedUpTeams[teamObj.cl][teamObj.zone][0].eid,
+						"startTime" : WTRL_signedUpTeams[teamObj.cl][teamObj.zone][0].startTime
+					});
+					
+					for (zoneKey in WTRL_signedUpTeams[teamObj.cl]) {
+						var process = false;
+						if(zoneKey=='PL' && msgObj.pl)
+							process = true;
+						else if(zoneKey=='1' && msgObj.z1)
+							process = true;
+						else if(zoneKey=='2' && msgObj.z2)
+							process = true;
+						else if(zoneKey=='3' && msgObj.z3)
+							process = true;
+						else if(zoneKey=='4' && msgObj.z4)
+							process = true;
+						else if(zoneKey=='5' && msgObj.z5)
+							process = true;
+						else if(zoneKey=='6' && msgObj.z6)
+							process = true;
+						else if(zoneKey=='7' && msgObj.z7)
+							process = true;
+						else if(zoneKey=='8' && msgObj.z8)
+							process = true;
+						else if(zoneKey=='9' && msgObj.z9)
+							process = true;
+						else if(zoneKey=='10' && msgObj.z10)
+							process = true;
+						else if(zoneKey=='11' && msgObj.z11)
+							process = true;
+						
+						if(zoneKey != teamObj.zone && process){
+							allDivs.push(
+							{
+								"eid" : WTRL_signedUpTeams[teamObj.cl][zoneKey][0].eid,
+								"startTime" : WTRL_signedUpTeams[teamObj.cl][zoneKey][0].startTime
+							}
+							);
+						}
+					}
+
+					getZPDivision(teamObj, allDivs, 0, function(teamRetObj){
+						
+						if(Object.keys(teamRetObj.teams).length > 0 && Object.keys(teamRetObj.riders).length > 0){
+						
+							console.log(teamRetObj);
+							//WRITE IP - ip
+							config.ip = ip.address();
+							//WRITE TEAMS - other_teams
+							/*
+							{
+								"team_leader": 9,
+								"name": "", 
+								"active": true
+							}
+							*/
+							config.other_teams = [];
+							for(var team_key in teamRetObj.teams){
+								var nTeam = teamRetObj.teams[team_key];
+								if(typeof WTRL_signedUpTeamTags['('+team_key+')'] != 'undefined'){
+									var nTeam_Obj = new Object;
+									nTeam_Obj.name = nTeam.name;
+									nTeam_Obj.team_leader = nTeam.rider.zid;
+									nTeam_Obj.active = true;
+									config.other_teams.push(nTeam_Obj);
+								}
+							}		
+							
+							//WRITE START_TIME - start_time
+							config.start_time = teamRetObj.startTime;
+							//WRITE RIDERS - riders
+							/*
+							{
+								"zid": 416001,
+								"name": "J. Carvalho",
+								"weight": 75,
+								"active": true
+							}				
+							*/
+							config.riders = [];
+							var tCaptain = {'rank':601,'zid':0};
+							for(var rider_key in teamRetObj.riders){
+								var nRider = teamRetObj.riders[rider_key];
+								var nRider_Obj = new Object;
+								nRider_Obj.name = nRider.name.replace(" "+teamRetObj.tag, "");
+								nRider_Obj.zid = nRider.zid;
+								nRider_Obj.weight = parseFloat(""+(nRider.weight == 0 ? "80" : nRider.weight));
+								nRider_Obj.active = true;
+								if(nRider.rank < tCaptain.rank )
+									tCaptain = nRider;
+								config.riders.push(nRider_Obj);
+							}
+							//WRITE TEAM CAPTAIN - team_leader
+							config.team_leader = tCaptain.zid;
+							//WRITE TEAM CLASS - team_class
+							config.team_class = teamRetObj.cl.toLowerCase();
+							
+							
+							fs.writeFile(confFile, JSON.stringify(config, null, 4), function (a,b,c){
+								
+								let rawdataT = fs.readFileSync(confFile);
+								config = JSON.parse(rawdataT);
+								tugaTeam.team_leader = config.team_leader;
+								tugaTeam.team_class = config.team_class;
+								
+								buildTeamsConfig();
+								buildTeamRosterConfig();
+								socket.emit('info',{"ended":true,'msg':'ZP Info Processed. File Saved. Info Loaded'});
+								
+							});
+						}else{
+							socket.emit('info',{"ended":true,'msg':'ZP Info Not Complete. File NOT Saved. Info NOT Loaded'});
+				
+						}
+					}, socket);
+					
+				}
+				
+			  });	
+			});
+		}
+	  });
+	  
+	  io.sockets.emit("zevent", { tugaZ: { blob: tugaTeam, riders: tugaZRiders}, distanceMarks: currentMap, WTRLTiming: WTRLTeams, 'ended': ended} );
+	});
 
 	httpServer.listen(config.port, () => {
 	  console.log('running at http://localhost:'+config.port);
 	});
+	
+	const getZPDivision = function(teamArg, allDivs, index, callback, socket){
+		const ZP_Signup_file = fs.createWriteStream("zp_signup.json");
+		var getRiders = false;
+		if(allDivs[index].eid == teamArg.eid)
+			getRiders = true;
+		
+		var urlZP = "https://www.zwiftpower.com/cache3/results/"+allDivs[index].eid+'_signups.json?_='+Math.round(Math.random()*1000000);
+		console.log("urlZP: "+urlZP);
+		const request = https.get(urlZP, function(response) {
+			console.log("response.statusCode: "+response.statusCode);
+			if(response.statusCode != 200){
+				socket.emit('info',{"ended":true,'msg':'ZP Info not available yet.'});
+			}else{
+				response.pipe(ZP_Signup_file);
+				
+				ZP_Signup_file.on('finish', function() {
+					ZP_Signup_file.close(function() {
+						buildConf(teamArg, allDivs[index], getRiders);
+						if(allDivs.length>index+1)
+							getZPDivision(teamArg, allDivs, index+1, callback, socket);
+						else{
+							callback(teamArg);
+						}
+					});  // close() is async, call cb after close completes.
+					
+				});
+			}
+		});
+	}
 
+	const buildConf = function(teamArg, divData, isGetRiders){
+		let zp_signup = fs.readFileSync("zp_signup.json");
+		let zp_signupconfig = JSON.parse(zp_signup);
+		
+		if(typeof teamArg.teams == 'undefined')
+			teamArg.teams = new Object;
+		if(typeof teamArg.riders == 'undefined')
+			teamArg.riders = new Object;
+		var teams = teamArg.teams;
+		var riders = teamArg.riders;
+		for(var i=0;i<zp_signupconfig.data.length;i++){
+			var riderS = zp_signupconfig.data[i];
+			var label = riderS.label;
+			if((label == 1 && teamArg.box == "A") ||
+			(label == 2 && teamArg.box == "B") ||
+			(label == 3 && teamArg.box == "C") ||
+			(label == 4 && teamArg.box == "D") ||
+			(label == 5 && teamArg.box == "E") 
+			){
+				if(riderS.name.trim().endsWith(")")){
+					var tag = riderS.name.trim().substring(riderS.name.lastIndexOf("(")+1);
+					tag = tag.replace(")","");
+					if(typeof teams[tag] == 'undefined'){
+						teams[tag] = new Object;
+						teams[tag].name = tag;
+						teams[tag].startTime = divData.startTime;
+						teams[tag].rider = new Object;
+						teams[tag].rider.rank = parseFloat(riderS.rank);
+						teams[tag].rider.zid = riderS.zwid;
+					}
+					if(parseFloat(riderS.rank) < teams[tag].rider.rank){
+						teams[tag].rider.rank = parseFloat(riderS.rank);
+						teams[tag].rider.zid = riderS.zwid;
+					}
+					if(isGetRiders){
+						var tag_comp = "("+tag+")";
+						if(tag_comp == teamArg.tag){
+							riders[riderS.zwid] = new Object;
+							riders[riderS.zwid].name = riderS.name;
+							riders[riderS.zwid].ftp = riderS.ftp;
+							riders[riderS.zwid].weight = riderS.w;
+							riders[riderS.zwid].zid = riderS.zwid;
+							riders[riderS.zwid].rank = riderS.rank;
+						}
+					}	
+				}
+			}
+		}
+	}
+	
 	const intervalOrder = setInterval(function() {
 		if(tugaTeam.total_time>0 && !ended){
 			if(tugaTeam.riderorder_time==1){
@@ -728,7 +1063,6 @@ module.exports = function(confFile, httpFile) {
 		}
 		io.sockets.emit("zevent", { tugaZ: { blob: tugaTeam, riders: tugaZRiders}, distanceMarks: currentMap, WTRLTiming: WTRLTeams, 'ended': ended} );
 	 }, 1000);
-
-
+	 
 	monitor.logTugaZ();
 }
