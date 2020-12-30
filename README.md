@@ -8,7 +8,6 @@
 Sample config file located at conf.json  
 Sample html file located at index.html  
 
-  **ip**: current local ip for Zwift packets listening;  
 	**port**: HTML server Port;  
 	**user**: Zwift User;  
 	**pwd**: Zwift Password;  
@@ -21,6 +20,9 @@ Sample html file located at index.html
 	**turns_sequence_names**: Rider turns sequence list;  
   **riders**: list of TugaZ team riders;  
   **other_teams**: Teams to follow during the TTT;  
+
+## Configuration Tool
+Enter in http://<url>:<port>/tools/build_template_conf.html to do an automatic Team configuration with data fetched from WTRL and ZwiftPower websites.
 
 ## Usage
 ### From source
