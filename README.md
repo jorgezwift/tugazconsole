@@ -22,7 +22,7 @@ Sample html file located at index.html
   **other_teams**: Teams to follow during the TTT;  
 
 ## Configuration Tool
-Enter in http://<url>:<port>/tools/build_template_conf.html to do an automatic Team configuration with data fetched from WTRL and ZwiftPower websites.
+Enter in http://_url_:_port_/tools/build_template_conf.html to do an automatic Team configuration with data fetched from WTRL and ZwiftPower websites.
 
 ## Usage
 ### From source
