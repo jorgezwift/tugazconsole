@@ -829,7 +829,7 @@ module.exports = function(confFile, httpFile) {
 									WTRL_signedUpTeams[curTeam.cl][curTeam.zone] = new Array;
 								}
 								WTRL_signedUpTeams[curTeam.cl][curTeam.zone].push(curTeam);
-								WTRL_signedUpTeamTags[curTeam.tag] = "valid";
+								WTRL_signedUpTeamTags[curTeam.tag] = curTeam;
 							}
 						}	
 					});	
@@ -903,11 +903,13 @@ module.exports = function(confFile, httpFile) {
 							for(var team_key in teamRetObj.teams){
 								var nTeam = teamRetObj.teams[team_key];
 								if(typeof WTRL_signedUpTeamTags['('+team_key+')'] != 'undefined'){
-									var nTeam_Obj = new Object;
-									nTeam_Obj.name = nTeam.name;
-									nTeam_Obj.team_leader = nTeam.rider.zid;
-									nTeam_Obj.active = true;
-									config.other_teams.push(nTeam_Obj);
+									if(WTRL_signedUpTeamTags['('+team_key+')'].cl == teamObj.cl){
+										var nTeam_Obj = new Object;
+										nTeam_Obj.name = nTeam.name;
+										nTeam_Obj.team_leader = nTeam.rider.zid;
+										nTeam_Obj.active = true;
+										config.other_teams.push(nTeam_Obj);
+									}
 								}
 							}		
 							
@@ -1020,7 +1022,7 @@ module.exports = function(confFile, httpFile) {
 			(label == 2 && teamArg.box == "B") ||
 			(label == 3 && teamArg.box == "C") ||
 			(label == 4 && teamArg.box == "D") ||
-			(label == 5 && teamArg.box == "E") 
+			(label == 5 && teamArg.box == "E") || true
 			){
 				if(riderS.name.trim().endsWith(")")){
 					var tag = riderS.name.trim().substring(riderS.name.lastIndexOf("(")+1);
