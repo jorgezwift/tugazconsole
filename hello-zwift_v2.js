@@ -99,6 +99,14 @@ module.exports = function(confFile, httpFile) {
 						rObj.weight,
 						rObj.ftp);
 				tugaZRiders['rider'+rObj.zid] = tRider;
+				if(typeof rObj.ftp != 'undefined'){
+					tRider.cp = rObj.ftp;
+					if(typeof rObj.wprime != 'undefined'){
+						tRider.wprime = rObj.wprime;
+					}else{
+						tRider.wprime = 0.0538*tRider.cp+8.78;
+					}
+				}
 			}
 		}
 	}
@@ -549,7 +557,6 @@ module.exports = function(confFile, httpFile) {
 				}	
 			}
 			
-			
 			if(frontid!=0){			
 				if(tugaTeam.startTime!=0){
 					for(var key in tugaZRiders){
@@ -570,6 +577,18 @@ module.exports = function(confFile, httpFile) {
 												-
 												(tugaTeam.startTime+tugaTeam.time));
 							}
+						}
+						
+						//UPDATE W'Bal
+						//-> (highest_time-(tugaTeam.startTime+tugaTeam.time))
+						if(rider.cp != -1){
+							var ttt_time = tugaTeam.total_time;
+							if(ttt_time==0){
+								ttt_time = 500;
+							}
+							var tdiff = highest_time - (ttt_time+tugaTeam.time);
+							if(tdiff>0)
+								rider.w_bal(tdiff, ttt_time);
 						}
 					}
 				}
@@ -931,6 +950,7 @@ module.exports = function(confFile, httpFile) {
 								var nRider_Obj = new Object;
 								nRider_Obj.name = nRider.name.replace(" "+teamRetObj.tag, "");
 								nRider_Obj.zid = nRider.zid;
+								nRider_Obj.ftp = nRider.ftp;
 								nRider_Obj.weight = parseFloat(""+(nRider.weight == 0 ? "80" : nRider.weight));
 								nRider_Obj.active = true;
 								if(nRider.rank < tCaptain.rank )
@@ -1044,7 +1064,11 @@ module.exports = function(confFile, httpFile) {
 						if(tag_comp == teamArg.tag){
 							riders[riderS.zwid] = new Object;
 							riders[riderS.zwid].name = riderS.name;
-							riders[riderS.zwid].ftp = riderS.ftp;
+							try{
+								riders[riderS.zwid].ftp = parseFloat(riderS.cp_1200_watts[1])*0.95;
+							}catch(e){
+								riders[riderS.zwid].ftp = parseFloat(riderS.ftp);
+							}
 							riders[riderS.zwid].weight = riderS.w;
 							riders[riderS.zwid].zid = riderS.zwid;
 							riders[riderS.zwid].rank = riderS.rank;
