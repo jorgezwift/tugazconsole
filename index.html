@@ -104,10 +104,11 @@
 	
 	
 	function swap(arr, first_Index, second_Index){
-    var temp = arr[first_Index];
-    arr[first_Index] = arr[second_Index];
-    arr[second_Index] = temp;
-}
+		var temp = arr[first_Index];
+		arr[first_Index] = arr[second_Index];
+		arr[second_Index] = temp;
+	}
+
 
 	function positionFormatter(value, row, index) {
 	
@@ -116,7 +117,7 @@
 			function(item, indice){
 				
 				var valWKNE = Math.round(item*17);
-				console.log(item +" : "+indice);
+				//console.log(item +" : "+indice);
 				if(indice==0){
 					var st = '<rect x="'+indice*10+'" y="'+(17-valWKNE)+'" height="'+(valWKNE)+'" width="10" fill="#000000"></rect>';
 					inner = inner + ""+st;
@@ -295,6 +296,7 @@
 				
 				last_comm_obj = content;
 			
+				//console.log(content.tugaZ.riders['rider65302'].ln+" : "+content.tugaZ.riders['rider65302'].sn+" : "+content.tugaZ.riders['rider65302'].cp+" : "+content.tugaZ.riders['rider65302'].wprime)
 				//RIDER ORDER
 				if(content.tugaZ.blob.riderorder_active){
 					$('#riderorder_div').show();
@@ -404,7 +406,10 @@
 							field: 'position',
 							formatter: positionFormatter
 						});
-					
+						columnsR.push({
+							title: 'W\' Bal',
+							field: 'w_ball'
+						});
 					
 						var m = 0; 
 						content.distanceMarks.forEach(function(mark){
@@ -606,10 +611,16 @@
 					
 					var pbarVal = 7;
 					var pbarRestVal = 0;
+					var bbarVal = 7;
+					var bbarRestVal = 0;
 					if(content.tugaZ.blob.power/content.tugaZ.blob.rider.weigth<7){
 						pbarVal = content.tugaZ.blob.power/content.tugaZ.blob.rider.weigth;
 						pbarRestVal = 7-content.tugaZ.blob.power/content.tugaZ.blob.rider.weigth;
 					}
+					
+					bbarVal = content.tugaZ.blob.rider.w_balV*7/(content.tugaZ.blob.rider.wprime*1000);
+					bbarRestVal = 7-bbarVal;
+					
 					var config = {
 						type: 'doughnut',
 						data: {
@@ -623,6 +634,17 @@
 									'rgb(201, 203, 207)'
 								],
 								label: 'Head of blob power'
+							},
+							{
+								data: [
+										bbarVal,
+										bbarRestVal
+								],
+								backgroundColor: [
+									presets.blue,
+									'rgb(201, 203, 207)'
+								],
+								label: 'w\'bal'
 							}],
 							labels: [
 							]
@@ -696,7 +718,8 @@
 							position: rider.position,
 							team_class: content.tugaZ.blob.team_class,
 							powerinfront: Math.round(rider.powerinfront*100/rider.weigth)/100+" w/kg",
-							timeinback: rider.timeinback/1000
+							timeinback: rider.timeinback/1000,
+							w_ball: Math.round(rider.w_balV*100/(rider.wprime*1000))+"%"
 						});
 						powerRiders.push(Math.max(2,Math.round(rider.power*100/rider.weigth)/100));
 					
@@ -713,7 +736,7 @@
 						
 						powerheadRiders.push(rider.powerinfront);
 						if(content.tugaZ.blob.total_time>0){
-							console.log(rider.name+": "+rider.power30s.length+" : "+rider.p20m+" : "+rider.power10s.length);
+							//console.log(rider.name+": "+rider.power30s.length+" : "+rider.p20m+" : "+rider.power10s.length);
 							angleRiders.push(Math.PI*2*rider.timeinfront/content.tugaZ.blob.total_time);
 						}
 					}
@@ -752,15 +775,24 @@
 				
 				var pbarVal = 7;
 				var pbarRestVal = 0;
+				var bbarVal = 7;
+				var bbarRestVal = 0;
 				if(content.tugaZ.blob.power/content.tugaZ.blob.rider.weigth<7){
 					pbarVal = content.tugaZ.blob.power/content.tugaZ.blob.rider.weigth;
 					pbarRestVal = 7-content.tugaZ.blob.power/content.tugaZ.blob.rider.weigth;
-				}	
+				}
+				
+				bbarVal = content.tugaZ.blob.rider.w_balV*7/(content.tugaZ.blob.rider.wprime*1000);
+				bbarRestVal = 7-bbarVal;
 					
 				chartHeadPower.config.data.datasets.forEach(function(dataset) {
-					dataset.data = [pbarVal, pbarRestVal];
-					dataset.backgroundColor = [headcolor,
+					if(dataset.label=='w\'bal'){
+						dataset.data = [bbarVal, bbarRestVal];
+					}else{
+						dataset.data = [pbarVal, pbarRestVal];
+						dataset.backgroundColor = [headcolor,
 									'rgb(201, 203, 207)'];
+					}
 				});
 				chartHeadPower.update();
 				
@@ -779,6 +811,8 @@
 						}
 					}else
 						$('#cur_distance').html(content.tugaZ.blob.rider.distance/1000+"");
+						
+					$('#w_bal').html(Math.round(content.tugaZ.blob.rider.w_balV*100/(content.tugaZ.blob.rider.wprime*1000))+"% w'bal");		
 					$('#head_power').html(content.tugaZ.blob.rider.power+"W");
 					$('#head_rider').html(content.tugaZ.blob.rider.name+"("+Math.floor(content.tugaZ.blob.time/1000)+"s)");
 					
@@ -941,6 +975,9 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="col-8 offset-2" style="text-align:center;margin-top: -30px !important;">
+							<h6 id="w_bal"></h6>
+						</div>
 						<div class="col-12" style="text-align:center">
 							<h3 id="head_power"></h3>
 							<h4 id="head_rider">-</h4>
