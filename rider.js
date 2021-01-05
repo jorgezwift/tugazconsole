@@ -31,14 +31,73 @@ class Rider {
 		this.p20m = 0;
 		this.active = true;
 		this.position = [0,0,0,0,0,0,0,0];
+		//W'Bal
+		this.wprime = -1;
+		this.cp = -1;
+		
+		this.sampleTime = 0;
+		this.oneSsamples = [];
+		this.w_balV = 0;
+		
+		this.sn = 0;
+		this.ln = 0;
+		
 
 	 }
   name() {
     if(this.name.length > 14)
 		return this.name.substring(0,13) + ".";
 	return this.name;
-	//return `${this.constructor.name}`;
   }
+  
+  
+  tau() {
+	  //Tau = W' / CP
+	  var tauV = this.wprime*1000 / this.cp;
+	  return tauV;
+	  
+  }
+  
+	w_bal(timediff, totaltime){
+		
+		if(this.sampleTime == 0)
+			this.w_balV = this.wprime;
+		
+		if(totaltime-this.sampleTime>1000){
+			this.w_balV = this.wprime*1000 - this.w_bal_integral(timediff, totaltime);
+			this.oneSsamples.splice(0, this.oneSsamples.length);
+			this.oneSsamples = [];
+			this.sampleTime = totaltime;
+			
+		}
+		this.oneSsamples.push(this.power);
+		
+		return this.w_balV;
+	}
+  
+  w_bal_integral(timediff, totaltime){
+	  //av_w - Average Watts Period
+	  //totaltime - in miliseconds
+	  //timediff - in miliseconds
+	  //W'EXP - Energy Expenditure above CP
+	  
+	  //1 Watt = 1 Joule/second	  
+	  var wAVG = 0;
+	  for(var j = 0;j<this.oneSsamples.length;j++){
+			wAVG = wAVG +this.oneSsamples[j];
+	  }
+	  wAVG = wAVG/this.oneSsamples.length;
+	  
+	  var pexp = wAVG-this.cp;
+	  if(pexp<0)
+		pexp = 0;
+	
+	   this.sn = this.sn + pexp*Math.exp(((totaltime/1000)/this.tau()));
+	  this.ln = Math.exp((-1*(totaltime/1000)/this.tau()))*this.sn;
+		  
+	  return this.ln;
+  }
+  
 }
 
 module.exports = Rider;
