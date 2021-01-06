@@ -104,7 +104,7 @@ module.exports = function(confFile, httpFile) {
 					if(typeof rObj.wprime != 'undefined'){
 						tRider.wprime = rObj.wprime;
 					}else{
-						tRider.wprime = 0.0538*tRider.cp+8.78;
+						tRider.wprime = 0.0795*tRider.cp-0.78;
 					}
 				}
 			}
@@ -927,6 +927,7 @@ module.exports = function(confFile, httpFile) {
 										nTeam_Obj.name = nTeam.name;
 										nTeam_Obj.team_leader = nTeam.rider.zid;
 										nTeam_Obj.active = true;
+										nTeam_Obj.start_time = nTeam.startTime
 										config.other_teams.push(nTeam_Obj);
 									}
 								}
@@ -935,14 +936,6 @@ module.exports = function(confFile, httpFile) {
 							//WRITE START_TIME - start_time
 							config.start_time = teamRetObj.startTime;
 							//WRITE RIDERS - riders
-							/*
-							{
-								"zid": 416001,
-								"name": "J. Carvalho",
-								"weight": 75,
-								"active": true
-							}				
-							*/
 							config.riders = [];
 							var tCaptain = {'rank':601,'zid':0};
 							for(var rider_key in teamRetObj.riders){
