@@ -1,0 +1,47 @@
+{
+	"name": "Casse-Pattes",
+	"distance": 23950,
+	"reverse": false,
+	"lines": [
+		{
+			"name": "Start",
+			"roadTime": 1
+		},
+		{
+			"name": "3km",
+			"roadTime": 3000
+		},
+		{
+			"name": "6km",
+			"roadTime": 6000
+		},
+		{
+			"name": "9km",
+			"roadTime": 9000
+		},
+		{
+			"name": "12km",
+			"roadTime": 12000
+		},
+		{
+			"name": "15km",
+			"roadTime": 15000
+		},
+		{
+			"name": "17.3km",
+			"roadTime": 17300
+		},
+		{
+			"name": "18.5km",
+			"roadTime": 18500
+		},
+		{
+			"name": "20.1km",
+			"roadTime": 20100
+		},
+		{
+			"name": "End",
+			"roadTime": 23950
+		}
+	]
+}
