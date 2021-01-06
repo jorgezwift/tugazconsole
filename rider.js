@@ -41,10 +41,7 @@ class Rider {
 		
 		this.sn = 0;
 		this.ln = 0;
-<<<<<<< HEAD
 		this.prev_watt = 0;
-=======
->>>>>>> 3d5b226c40d86119e36ac57d6df68120d7c9a20e
 		
 
 	 }
@@ -64,30 +61,20 @@ class Rider {
   
 	w_bal(timediff, totaltime){
 		
-<<<<<<< HEAD
 		if(this.sampleTime == 0){
 			this.w_balV = this.wprime;
 			this.prev_watt = this.power;
 		}
-=======
-		if(this.sampleTime == 0)
-			this.w_balV = this.wprime;
->>>>>>> 3d5b226c40d86119e36ac57d6df68120d7c9a20e
 		
 		if(totaltime-this.sampleTime>1000){
 			this.w_balV = this.wprime*1000 - this.w_bal_integral(timediff, totaltime);
 			this.oneSsamples.splice(0, this.oneSsamples.length);
-<<<<<<< HEAD
 			this.oneSsamples.push((this.prev_watt+this.power)/2);
-=======
-			this.oneSsamples = [];
->>>>>>> 3d5b226c40d86119e36ac57d6df68120d7c9a20e
 			this.sampleTime = totaltime;
 			
 		}
 		this.oneSsamples.push(this.power);
 		
-<<<<<<< HEAD
 		if(this.w_balV<0)
 			this.w_balV = 0;
 			
@@ -97,8 +84,6 @@ class Rider {
 		
 		this.prev_watt = this.power;
 		
-=======
->>>>>>> 3d5b226c40d86119e36ac57d6df68120d7c9a20e
 		return this.w_balV;
 	}
   
@@ -118,15 +103,10 @@ class Rider {
 	  var pexp = wAVG-this.cp;
 	  if(pexp<0)
 		pexp = 0;
-	
-<<<<<<< HEAD
 	  
 	  //this.sn = this.sn + pexp*(timediff/1000)*Math.exp(((totaltime/1000)*(1000/timediff)/this.tau()));
 	  this.sn = this.sn + pexp*Math.exp(((totaltime/1000)/this.tau()));
 	  //this.ln = Math.exp((-1*(totaltime/1000)*(1000/timediff)/this.tau()))*this.sn;
-=======
-	   this.sn = this.sn + pexp*Math.exp(((totaltime/1000)/this.tau()));
->>>>>>> 3d5b226c40d86119e36ac57d6df68120d7c9a20e
 	  this.ln = Math.exp((-1*(totaltime/1000)/this.tau()))*this.sn;
 		  
 	  return this.ln;
