@@ -713,6 +713,19 @@
 							power_rocket = 6;
 						}	
 						
+						var modeStr = "";
+						if(rider.mode == -1){
+							modeStr = "<span style=\"color:red\">&#x21E9;</span>";
+						}else if(rider.mode == 0){
+							modeStr = "<span>&#x21D4;</span>";
+						}else if(rider.mode == 1){
+							modeStr = "<span style=\"color:green\">&#x21E7;</span>";
+						}else if(rider.mode == 2){
+							modeStr = "<span style=\"color:green\">&#x21E7;&#x21E7;</span>";
+						}else{
+							modeStr = "<span style=\"color:green\">&#x21E7;&#x21E7;&#x21E7;</span>";
+						}
+						
 						rowsR.push({
 							name: rider.name,
 							ko: rider.ko,
@@ -724,7 +737,7 @@
 							team_class: content.tugaZ.blob.team_class,
 							powerinfront: Math.round(rider.powerinfront*100/rider.weigth)/100+" w/kg",
 							timeinback: rider.timeinback/1000,
-							w_ball: "<b>"+Math.round(rider.w_balV*100/(rider.wprime*1000))+"%</b> - "+Math.floor(rider.w_balV/(40*(power_rocket*rider.weigth - rider.cp)))+" &#x1F680;"
+							w_ball: "<b>"+Math.round(rider.w_balV*100/(rider.wprime*1000))+"%</b> - "+Math.floor(rider.w_balV/(40*(power_rocket*rider.weigth - rider.cp)))+" &#x1F680;&nbsp;&nbsp;"+modeStr
 						});
 						powerRiders.push(Math.max(2,Math.round(rider.power*100/rider.weigth)/100));
 					
