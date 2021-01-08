@@ -98,15 +98,22 @@ module.exports = function(confFile, httpFile) {
 						he.decode(rObj.name), 
 						rObj.weight,
 						rObj.ftp);
+				tRider.div = config.team_class;		
 				tugaZRiders['rider'+rObj.zid] = tRider;
 				if(typeof rObj.ftp != 'undefined'){
 					tRider.cp = rObj.ftp;
 					if(typeof rObj.wprime != 'undefined'){
 						tRider.wprime = rObj.wprime;
 					}else{
-						tRider.wprime = 0.0795*tRider.cp-0.78;
+						if(typeof rObj.ftp5m != 'undefined'){
+							tRider.wprime = (((300 * (rObj.ftp5m-tRider.cp)) +
+										(1200 * (rObj.ftp20m-tRider.cp))) /2)/1000;
+						}else{
+							tRider.wprime = 0.0795*tRider.cp-0.78;
+						}
 					}
 				}
+				tRider.w_balV = tRider.wprime*1000;
 			}
 		}
 	}
@@ -920,15 +927,18 @@ module.exports = function(confFile, httpFile) {
 							*/
 							config.other_teams = [];
 							for(var team_key in teamRetObj.teams){
-								var nTeam = teamRetObj.teams[team_key];
-								if(typeof WTRL_signedUpTeamTags['('+team_key+')'] != 'undefined'){
-									if(WTRL_signedUpTeamTags['('+team_key+')'].cl == teamObj.cl){
-										var nTeam_Obj = new Object;
-										nTeam_Obj.name = nTeam.name;
-										nTeam_Obj.team_leader = nTeam.rider.zid;
-										nTeam_Obj.active = true;
-										nTeam_Obj.start_time = nTeam.startTime
-										config.other_teams.push(nTeam_Obj);
+								var ttag = '('+team_key+')';
+								if(ttag!=teamObj.tag){
+									var nTeam = teamRetObj.teams[team_key];
+									if(typeof WTRL_signedUpTeamTags['('+team_key+')'] != 'undefined'){
+										if(WTRL_signedUpTeamTags['('+team_key+')'].cl == teamObj.cl){
+											var nTeam_Obj = new Object;
+											nTeam_Obj.name = nTeam.name;
+											nTeam_Obj.team_leader = nTeam.rider.zid;
+											nTeam_Obj.active = true;
+											nTeam_Obj.start_time = nTeam.startTime
+											config.other_teams.push(nTeam_Obj);
+										}
 									}
 								}
 							}		
@@ -1058,10 +1068,13 @@ module.exports = function(confFile, httpFile) {
 							riders[riderS.zwid] = new Object;
 							riders[riderS.zwid].name = riderS.name;
 							try{
-								riders[riderS.zwid].ftp = parseFloat(riderS.cp_1200_watts[1])*0.95;
+								riders[riderS.zwid].ftp = (1200 * parseFloat(riderS.cp_1200_watts[1]) - 300 * parseFloat(riderS.cp_300_watts[1])) / (1200 - 300);
+								//riders[riderS.zwid].ftp = parseFloat(riderS.cp_1200_watts[1])*0.95;
 							}catch(e){
 								riders[riderS.zwid].ftp = parseFloat(riderS.ftp);
 							}
+							riders[riderS.zwid].ftp5m = parseFloat(riderS.cp_300_watts[1]);
+							riders[riderS.zwid].ftp20m = parseFloat(riderS.cp_1200_watts[1]);
 							riders[riderS.zwid].weight = riderS.w;
 							riders[riderS.zwid].zid = riderS.zwid;
 							riders[riderS.zwid].rank = riderS.rank;
