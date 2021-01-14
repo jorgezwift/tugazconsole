@@ -954,6 +954,8 @@ module.exports = function(confFile, httpFile) {
 								nRider_Obj.name = nRider.name.replace(" "+teamRetObj.tag, "");
 								nRider_Obj.zid = nRider.zid;
 								nRider_Obj.ftp = nRider.ftp;
+								nRider_Obj.ftp20m = nRider.ftp20m;
+								nRider_Obj.ftp5m = nRider.ftp5m;
 								nRider_Obj.weight = parseFloat(""+(nRider.weight == 0 ? "80" : nRider.weight));
 								nRider_Obj.active = true;
 								if(nRider.rank < tCaptain.rank )
