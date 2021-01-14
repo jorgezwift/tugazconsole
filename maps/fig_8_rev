@@ -1,0 +1,47 @@
+{
+	"name": "Watopia Figure 8 Reverse",
+	"distance": 30050,
+	"reverse": true,
+	"lines": [
+		{
+			"name": "Start",
+			"roadTime": 1
+		},
+		{
+			"name": "3.5km",
+			"roadTime": 3500
+		},
+		{
+			"name": "7.4km",
+			"roadTime": 7400
+		},
+		{
+			"name": "10km",
+			"roadTime": 10000
+		},
+		{
+			"name": "14km",
+			"roadTime": 14000
+		},
+		{
+			"name": "18km",
+			"roadTime": 18000
+		},
+		{
+			"name": "21.7km",
+			"roadTime": 21700
+		},
+		{
+			"name": "22.8km",
+			"roadTime": 22800
+		},
+		{
+			"name": "26.5km",
+			"roadTime": 26500
+		},
+		{
+			"name": "End",
+			"roadTime": 30050
+		}
+	]
+}
