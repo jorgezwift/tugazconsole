@@ -1,6 +1,6 @@
 {
 	"name": "Watopia Figure 8 Reverse",
-	"distance": 30020,
+	"distance": 29950,
 	"reverse": true,
 	"lines": [
 		{
@@ -41,7 +41,7 @@
 		},
 		{
 			"name": "End",
-			"roadTime": 30020
+			"roadTime": 29950
 		}
 	]
 }
