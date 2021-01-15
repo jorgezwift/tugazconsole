@@ -93,7 +93,14 @@ class Rider {
 		}
 		
 		if(totaltime-this.sampleTime>1000){
-			this.w_balV = this.wprime*1000 - this.w_bal_integral(timediff, totaltime);
+			
+			var timess = Math.floor((totaltime-this.sampleTime)/1000);
+	
+			for(var itimes=0; itimes<timess; itimes++){
+				this.w_balV = this.wprime*1000 - this.w_bal_integral(timediff, totaltime);
+			}
+			totaltime = totaltime+(1000*timess);
+			
 			this.oneSsamples.splice(0, this.oneSsamples.length);
 			this.oneSsamples.push((this.prev_watt+this.power)/2);
 			this.sampleTime = totaltime;
@@ -122,7 +129,7 @@ class Rider {
 	  //1 Watt = 1 Joule/second	  
 	  var wAVG = 0;
 	  for(var j = 0;j<this.oneSsamples.length;j++){
-			wAVG = wAVG +this.oneSsamples[j];
+		wAVG = wAVG +this.oneSsamples[j];
 	  }
 	  wAVG = wAVG/this.oneSsamples.length;
 	  
@@ -136,8 +143,8 @@ class Rider {
 		pexpN=1;  
 	  }
 		
-		var snCur = 0;
-		if(pexpN/this.cp > 0.66){
+	   var snCur = 0;
+	   if(pexpN/this.cp > 0.66){
 		  this.mode = 3;
 		  snCur = this.sn3 + pexp*Math.exp(((totaltime/1000)/this.tau(pexpN)));
 	   }else if(pexpN/this.cp > 0.20 ){
