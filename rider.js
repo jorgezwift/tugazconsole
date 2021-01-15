@@ -90,6 +90,7 @@ class Rider {
 		if(this.sampleTime == 0){
 			this.w_balV = this.wprime;
 			this.prev_watt = this.power;
+			this.sampleTime = totaltime;
 		}
 		
 		if(totaltime-this.sampleTime>1000){
@@ -99,11 +100,11 @@ class Rider {
 			for(var itimes=0; itimes<timess; itimes++){
 				this.w_balV = this.wprime*1000 - this.w_bal_integral(timediff, totaltime);
 			}
-			totaltime = totaltime+(1000*timess);
+			
 			
 			this.oneSsamples.splice(0, this.oneSsamples.length);
 			this.oneSsamples.push((this.prev_watt+this.power)/2);
-			this.sampleTime = totaltime;
+			this.sampleTime = this.sampleTime+(1000*timess);
 			
 		}
 		this.oneSsamples.push(this.power);
