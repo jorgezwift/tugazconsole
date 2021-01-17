@@ -853,18 +853,20 @@ module.exports = function(confFile, httpFile) {
 							}else if(j==7){
 								var linka = $(td).children('a');
 								var href1 = linka.attr('href');
-								var href2 = href1.substring(href1.lastIndexOf("/")+1);
-								console.log(href2);
-								curTeam.eid=href2;
-								if(true){
-									if(typeof WTRL_signedUpTeams[curTeam.cl] == 'undefined')
-										WTRL_signedUpTeams[curTeam.cl] = new Object;
-									if(typeof WTRL_signedUpTeams[curTeam.cl][curTeam.zone] == 'undefined'){
-										WTRL_signedUpTeams[curTeam.cl][curTeam.zone] = new Array;
+								if(typeof href1 != 'undefined'){
+									var href2 = href1.substring(href1.lastIndexOf("/")+1);
+									console.log(href2);
+									curTeam.eid=href2;
+									if(true){
+										if(typeof WTRL_signedUpTeams[curTeam.cl] == 'undefined')
+											WTRL_signedUpTeams[curTeam.cl] = new Object;
+										if(typeof WTRL_signedUpTeams[curTeam.cl][curTeam.zone] == 'undefined'){
+											WTRL_signedUpTeams[curTeam.cl][curTeam.zone] = new Array;
+										}
+										WTRL_signedUpTeams[curTeam.cl][curTeam.zone].push(curTeam);
+										WTRL_signedUpTeamTags[curTeam.tag] = curTeam;
 									}
-									WTRL_signedUpTeams[curTeam.cl][curTeam.zone].push(curTeam);
-									WTRL_signedUpTeamTags[curTeam.tag] = curTeam;
-								}
+								}	
 							}	
 						});	
 						console.log("--------");
@@ -1194,12 +1196,12 @@ module.exports = function(confFile, httpFile) {
 
 https.get(options, (response) => {
 
-								*/
 								
 								
 							});
 						});
-						*/
+								*/
+						
 						
 					}
 					
