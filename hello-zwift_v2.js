@@ -991,6 +991,7 @@ module.exports = function(confFile, httpFile) {
 							}else{
 								socket.emit('info',{"ended":true,'msg':'ZP Info Not Complete. File NOT Saved. Info NOT Loaded'});
 					
+
 							}
 						}, socket);
 						
