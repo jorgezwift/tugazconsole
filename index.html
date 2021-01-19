@@ -173,6 +173,12 @@
 					eff_level1 = 5;
 					eff_level2 = 4.5;
 					eff_level3 = 4.2;
+				}else if(row.team_class == "doppio"){
+					min_range = 4;
+					max_range = 6.5;
+					eff_level1 = 5.5;
+					eff_level2 = 4.7;
+					eff_level3 = 4.3;
 				}	
 				var valWK = item.power/row.w;
                 var valWKN = valWK-min_range;
@@ -711,6 +717,8 @@
 							power_rocket = 4.5;
 						}else if(content.tugaZ.blob.team_class == "espresso"){
 							power_rocket = 6;
+						}else if(content.tugaZ.blob.team_class == "doppio"){
+							power_rocket = 6.2;
 						}	
 						
 						var modeStr = "";

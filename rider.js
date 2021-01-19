@@ -64,6 +64,8 @@ class Rider {
 			rest = 250;
 		else if(this.div=="latte")
 			rest = 220;
+		else if(this.div=="doppio")
+			rest = 300;
 			
 		var modeInner = this.mode;
 		if(typeof modePar != 'undefined')
