@@ -1,6 +1,6 @@
 {
 	"name": "R.G.V.",
-	"distance": 25100,
+	"distance": 25050,
 	"reverse": false,
 	"lines": [
 		{
@@ -41,7 +41,7 @@
 		},
 		{
 			"name": "End",
-			"roadTime": 25100
+			"roadTime": 25050
 		}
 	]
 }
