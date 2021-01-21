@@ -1227,8 +1227,7 @@ https.get(options, (response) => {
 		//Extract Rider/Teams  from:
 		//https://www.wtrl.racing/live-racing.php?results=+allDivs[index].eid
 		//TODO
-		
-			console.log("response.statusCode: "+response.statusCode);
+		//console.log("response.statusCode: "+response.statusCode);
 		var urlZP = "https://www.zwiftpower.com/cache3/results/"+allDivs[index].eid+'_signups.json?_='+Math.round(Math.random()*1000000);
 		console.log("urlZP: "+urlZP);
 		const request = https.get(urlZP, function(response) {
