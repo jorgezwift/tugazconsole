@@ -1,0 +1,47 @@
+{
+	"distance": 20900,
+	"name": "NY Mighty M.",
+	"reverse": false,
+	"lines": [
+		{
+			"name": "Start",
+			"roadTime": 1
+		},
+		{
+			"name": "3.3km",
+			"roadTime": 3300
+		},
+		{
+			"name": "4km",
+			"roadTime": 4000
+		},
+		{
+			"name": "6.3km",
+			"roadTime": 6300
+		},
+		{
+			"name": "8.6km",
+			"roadTime": 8600
+		},
+		{
+			"name": "10.3km",
+			"roadTime": 10300
+		},
+		{
+			"name": "13km",
+			"roadTime": 13000
+		},
+		{
+			"name": "16km",
+			"roadTime": 16000
+		},
+		{
+			"name": "18.1km",
+			"roadTime": 18100
+		},
+		{
+			"name": "End",
+			"roadTime": 20900
+		}
+	]
+}
