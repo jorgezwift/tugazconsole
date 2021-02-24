@@ -76,6 +76,10 @@ module.exports = function(confFile, httpFile) {
 				if(typeof tObj.startTime != 'undefined'){
 					startT = tObj.startTime;
 				}
+				
+				if(typeof tObj.start_time != 'undefined'){
+					startT = tObj.start_time;
+				}
 				var tTeam = new Team(tObj.team_leader, tObj.name, tObj.active, startT);
 				if(typeof tObj.marks != 'undefined'){
 					tTeam.marks = tObj.marks;
@@ -141,7 +145,7 @@ module.exports = function(confFile, httpFile) {
 					team.start_clock_time = time;
 				}else{
 					var processCrossing = false;
-					if(typeof currentMap[i].roadID == 'undefined'){
+					if(typeof currentMap[crossing.lineId+1].roadID == 'undefined'){
 						processCrossing = true;
 					}else if(crossing.distance > currentMap[crossing.lineId+1].limit1 &&
 					crossing.distance < currentMap[crossing.lineId+1].limit2){
@@ -729,9 +733,17 @@ module.exports = function(confFile, httpFile) {
 				if(team.active && !team.complete){
 				//console.log("get: "+team.name);
 					world.riderStatus(team.zid).then(statuss => {
-						statuss.roadID=0;
-						statuss.world=1;
-
+						var course =  ((statuss.f19 & 0xff0000) >> 16);
+						var world = course - 2;
+						var roadID = ((statuss.f20 & 0xff00) >> 8);
+						var isTurning = ((statuss.f19 & 8) !== 0);
+						var isForward = ((statuss.f19 & 4) !== 0);
+						
+						statuss.roadID=roadID;
+						statuss.isTurning=isTurning;
+						statuss.isForward=isForward;
+						statuss.world=world;
+						
 						if(!ended){
 							//updateRiders(statuss.riderStatus);
 						}

@@ -11,73 +11,73 @@
 			"name": "4km",
 			"limit1": 3000,
 			"limit2": 5000,
-			"world": 1,
-			"roadID": 0,
-			"roadTime": 513363
+			"world": 6,
+			"roadID": 4,
+			"roadTime": 505880
 		},
 		{
 			"name": "8km",
 			"limit1": 7000,
 			"limit2": 9000,
-			"world": 1,
-			"roadID": 0,
-			"roadTime": 853838
+			"world": 6,
+			"roadID": 16,
+			"roadTime": 871019
 		},
 		{
-			"name": "11.7km",
+			"name": "Lap 1",
 			"limit1": 10000,
 			"limit2": 13000,
-			"world": 1,
-			"roadID": 0,
-			"roadTime": 173689
+			"world": 6,
+			"roadID": 4,
+			"roadTime": 173264
 		},
 		{
 			"name": "15.7km",
 			"limit1": 14000,
 			"limit2": 17000,
-			"world": 1,
-			"roadID": 0,
-			"roadTime": 513364
+			"world": 6,
+			"roadID": 4,
+			"roadTime": 505881
 		},
 		{
 			"name": "19.7km",
 			"limit1": 18000,
 			"limit2": 21000,
-			"world": 1,
-			"roadID": 0,
-			"roadTime": 853839
+			"world": 6,
+			"roadID": 16,
+			"roadTime": 871018
 		},
 		{
-			"name": "23.4km",
+			"name": "Lap 2",
 			"limit1": 22000,
 			"limit2": 25000,
-			"world": 1,
-			"roadID": 0,
-			"roadTime": 173690
+			"world": 6,
+			"roadID": 4,
+			"roadTime": 173263
 		},
 		{
 			"name": "27.4km",
 			"limit1": 26000,
 			"limit2": 29000,
-			"world": 1,
-			"roadID": 0,
-			"roadTime": 513362
+			"world": 6,
+			"roadID": 4,
+			"roadTime": 505878
 		},
 		{
 			"name": "31.4km",
 			"limit1": 30000,
 			"limit2": 33000,
-			"world": 1,
-			"roadID": 0,
-			"roadTime": 853837
+			"world": 6,
+			"roadID": 16,
+			"roadTime": 871017
 		},
 		{
 			"name": "End",
 			"limit1": 34000,
 			"limit2": 37000,
-			"world": 1,
-			"roadID": 0,
-			"roadTime": 173688
+			"world": 6,
+			"roadID": 4,
+			"roadTime": 173262
 		}
 	]
 }
