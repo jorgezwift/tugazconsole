@@ -12,9 +12,10 @@ var ip = require("ip");
 const he = require('he');
 
 module.exports = function(confFile, httpFile) {
+	console.log(2);
 	let rawdata = fs.readFileSync(confFile);
 	var config = JSON.parse(rawdata);
-
+	console.log(1);
 	var ifface = config.ip;
 	
 	const monitor = new ZwiftPacketMonitor(ip.address())
@@ -122,7 +123,11 @@ module.exports = function(confFile, httpFile) {
 	monitorLine.addDistanceMark(100, currentMap[0].name, currentMap[0].roadTime);
 
 	for(var i = 1; i<currentMap.length; i++){
-		monitorLine.addDistanceMark(i-1, currentMap[i].name, currentMap[i].roadTime);	
+		if(typeof currentMap[i].roadID == 'undefined'){
+			monitorLine.addDistanceMark(i-1, currentMap[i].name, currentMap[i].roadTime);
+		}else{
+			monitorLine.addLine(i-1, currentMap[i].name, currentMap[i].world, currentMap[i].roadID, currentMap[i].roadTime);
+		}			
 	}
 
 	monitorLine.on('crossing', (crossing) => {
@@ -135,16 +140,26 @@ module.exports = function(confFile, httpFile) {
 					var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 					team.start_clock_time = time;
 				}else{
-					if(team.marks.length>crossing.lineId){
-						return;
-					}else if(team.marks.length<crossing.lineId){
-						for(var i = team.marks.length;i<crossing.lineId;i++){
-							team.marks[i] = -1;
-						}
+					var processCrossing = false;
+					if(typeof currentMap[i].roadID == 'undefined'){
+						processCrossing = true;
+					}else if(crossing.distance > currentMap[crossing.lineId+1].limit1 &&
+					crossing.distance < currentMap[crossing.lineId+1].limit2){
+						processCrossing = true;
 					}
-					team.marks[crossing.lineId] = crossing.time;
-					if(crossing.lineId == (currentMap.length-2) ){
-						team.complete = true;
+					if(processCrossing){	
+						if(team.marks.length>crossing.lineId){
+							return;
+						}else if(team.marks.length<crossing.lineId){
+							
+							for(var i = team.marks.length;i<crossing.lineId;i++){
+								team.marks[i] = -1;
+							}
+						}
+						team.marks[crossing.lineId] = crossing.time;
+						if(crossing.lineId == (currentMap.length-2) ){
+							team.complete = true;
+						}
 					}
 				}
 			}
@@ -518,7 +533,7 @@ module.exports = function(confFile, httpFile) {
 				if(rider.speed>0){
 					rider.ko = false;
 					var current_distance = 0;
-					if(highest_time_distance<(rider.distance+150)){	
+					if(highest_time_distance<(rider.distance+500)){	
 						if(rider.worldTime == highest_time){
 							current_distance = rider.roadTime;
 						}else{

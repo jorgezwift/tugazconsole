@@ -1,0 +1,83 @@
+{
+	"name": "Astoria 8",
+	"distance": 35050,
+	"reverse": false,
+	"lines": [
+		{
+			"name": "Start",
+			"roadTime": 1
+		},
+		{
+			"name": "4km",
+			"limit1": 3000,
+			"limit2": 5000,
+			"world": 1,
+			"roadID": 0,
+			"roadTime": 513363
+		},
+		{
+			"name": "8km",
+			"limit1": 7000,
+			"limit2": 9000,
+			"world": 1,
+			"roadID": 0,
+			"roadTime": 853838
+		},
+		{
+			"name": "11.7km",
+			"limit1": 10000,
+			"limit2": 13000,
+			"world": 1,
+			"roadID": 0,
+			"roadTime": 173689
+		},
+		{
+			"name": "15.7km",
+			"limit1": 14000,
+			"limit2": 17000,
+			"world": 1,
+			"roadID": 0,
+			"roadTime": 513364
+		},
+		{
+			"name": "19.7km",
+			"limit1": 18000,
+			"limit2": 21000,
+			"world": 1,
+			"roadID": 0,
+			"roadTime": 853839
+		},
+		{
+			"name": "23.4km",
+			"limit1": 22000,
+			"limit2": 25000,
+			"world": 1,
+			"roadID": 0,
+			"roadTime": 173690
+		},
+		{
+			"name": "27.4km",
+			"limit1": 26000,
+			"limit2": 29000,
+			"world": 1,
+			"roadID": 0,
+			"roadTime": 513362
+		},
+		{
+			"name": "31.4km",
+			"limit1": 30000,
+			"limit2": 33000,
+			"world": 1,
+			"roadID": 0,
+			"roadTime": 853837
+		},
+		{
+			"name": "End",
+			"limit1": 34000,
+			"limit2": 37000,
+			"world": 1,
+			"roadID": 0,
+			"roadTime": 173688
+		}
+	]
+}
