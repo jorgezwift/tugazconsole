@@ -163,6 +163,8 @@ module.exports = function(confFile, httpFile) {
 						team.marks[crossing.lineId] = crossing.time;
 						if(crossing.lineId == (currentMap.length-2) ){
 							team.complete = true;
+							if(team.name == 'TugaZ')
+								ended = true;
 						}
 					}
 				}
@@ -701,7 +703,7 @@ module.exports = function(confFile, httpFile) {
 			
 			if(highest_time_distance > endDistance && finalTime == -1){
 				finalTime = highest_time;
-				ended = true;
+				//ended = true;
 				monitor.logTugaZ();
 			}
 		}
@@ -739,10 +741,10 @@ module.exports = function(confFile, httpFile) {
 						var isTurning = ((statuss.f19 & 8) !== 0);
 						var isForward = ((statuss.f19 & 4) !== 0);
 						
-						statuss.roadID=roadID;
-						statuss.isTurning=isTurning;
-						statuss.isForward=isForward;
-						statuss.world=world;
+						statuss.riderStatus.roadID=roadID;
+						statuss.riderStatus.isTurning=isTurning;
+						statuss.riderStatus.isForward=isForward;
+						statuss.riderStatus.world=world;
 						
 						if(!ended){
 							//updateRiders(statuss.riderStatus);
