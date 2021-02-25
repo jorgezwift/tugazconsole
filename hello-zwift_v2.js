@@ -741,19 +741,19 @@ module.exports = function(confFile, httpFile) {
 						var isTurning = ((statuss.f19 & 8) !== 0);
 						var isForward = ((statuss.f19 & 4) !== 0);
 						
-						statuss.riderStatus.roadID=roadID;
-						statuss.riderStatus.isTurning=isTurning;
-						statuss.riderStatus.isForward=isForward;
-						statuss.riderStatus.world=world;
+						statuss.roadID=roadID;
+						statuss.isTurning=isTurning;
+						statuss.isForward=isForward;
+						statuss.world=world;
 						
 						if(!ended){
 							//updateRiders(statuss.riderStatus);
 						}
 						
-						if(typeof WTRLTeams['team'+statuss.riderStatus.id] != 'undefined')
-							WTRLTeams['team'+statuss.riderStatus.id].distance = statuss.riderStatus.distance;
+						if(typeof WTRLTeams['team'+statuss.id] != 'undefined')
+							WTRLTeams['team'+statuss.id].distance = statuss.distance;
 				
-						monitorLine.updateRiderStatus(statuss.riderStatus, statuss.riderStatus.worldTime);
+						monitorLine.updateRiderStatus(statuss, statuss.worldTime);
 					});
 				}
 			}
