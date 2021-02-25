@@ -1,6 +1,6 @@
 {
 	"name": "Astoria 8",
-	"distance": 35050,
+	"distance": 34900,
 	"reverse": false,
 	"lines": [
 		{
@@ -9,64 +9,64 @@
 		},
 		{
 			"name": "4km",
-			"limit1": 3000,
-			"limit2": 5000,
+			"limit1": 3500,
+			"limit2": 4500,
 			"world": 6,
 			"roadID": 4,
 			"roadTime": 505880
 		},
 		{
 			"name": "8km",
-			"limit1": 7000,
-			"limit2": 9000,
+			"limit1": 7500,
+			"limit2": 8500,
 			"world": 6,
 			"roadID": 16,
 			"roadTime": 871019
 		},
 		{
 			"name": "Lap 1",
-			"limit1": 10000,
-			"limit2": 13000,
+			"limit1": 10500,
+			"limit2": 12500,
 			"world": 6,
 			"roadID": 4,
 			"roadTime": 173264
 		},
 		{
 			"name": "15.7km",
-			"limit1": 14000,
-			"limit2": 17000,
+			"limit1": 14500,
+			"limit2": 16500,
 			"world": 6,
 			"roadID": 4,
 			"roadTime": 505881
 		},
 		{
 			"name": "19.7km",
-			"limit1": 18000,
-			"limit2": 21000,
+			"limit1": 18500,
+			"limit2": 20500,
 			"world": 6,
 			"roadID": 16,
 			"roadTime": 871018
 		},
 		{
 			"name": "Lap 2",
-			"limit1": 22000,
-			"limit2": 25000,
+			"limit1": 22500,
+			"limit2": 24500,
 			"world": 6,
 			"roadID": 4,
 			"roadTime": 173263
 		},
 		{
-			"name": "27.4km",
-			"limit1": 26000,
-			"limit2": 29000,
+			"name": "27.3km",
+			"limit1": 26500,
+			"limit2": 28000,
 			"world": 6,
 			"roadID": 4,
 			"roadTime": 505878
 		},
 		{
-			"name": "31.4km",
-			"limit1": 30000,
-			"limit2": 33000,
+			"name": "31.2km",
+			"limit1": 30500,
+			"limit2": 32000,
 			"world": 6,
 			"roadID": 16,
 			"roadTime": 871017
@@ -74,7 +74,7 @@
 		{
 			"name": "End",
 			"limit1": 34000,
-			"limit2": 37000,
+			"limit2": 36500,
 			"world": 6,
 			"roadID": 4,
 			"roadTime": 173262
