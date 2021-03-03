@@ -1,0 +1,83 @@
+{
+	"name": "Astoria 8",
+	"distance": 29500,
+	"reverse": false,
+	"lines": [
+		{
+			"name": "Start",
+			"roadTime": 1
+		},
+		{
+			"name": "T. Exit",
+			"limit1": 2500,
+			"limit2": 4500,
+			"world": 4,
+			"roadID": 1,
+			"roadTime": 569669
+		},
+		{
+			"name": "KOM Start",
+			"limit1": 6000,
+			"limit2": 8000,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 390182
+		},
+		{
+			"name": "1/2 KOM",
+			"limit1": 8000,
+			"limit2": 10000,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 285523
+		},
+		{
+			"name": "Lap 1/2",
+			"limit1": 10300,
+			"limit2": 12300,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 987687
+		},
+		{
+			"name": "I. Villas",
+			"limit1": 13500,
+			"limit2": 15500,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 564489
+		},
+		{
+			"name": "T. Exit 2",
+			"limit1": 19000,
+			"limit2": 21000,
+			"world": 4,
+			"roadID": 1,
+			"roadTime": 257497
+		},
+		{
+			"name": "KOM",
+			"limit1": 21000,
+			"limit2": 23000,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 188028
+		},
+		{
+			"name": "I. Villas 2",
+			"limit1": 25000,
+			"limit2": 27000,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 564489
+		},
+		{
+			"name": "End",
+			"limit1": 28500,
+			"limit2": 30500,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 987687
+		}
+	]
+}
