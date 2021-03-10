@@ -1,0 +1,83 @@
+{
+	"name": "Greatest London Flat",
+	"distance": 31300,
+	"reverse": false,
+	"lines": [
+		{
+			"name": "Start",
+			"roadTime": 1
+		},
+		{
+			"name": "3.6km",
+			"limit1": 3000,
+			"limit2": 4000,
+			"world": 5,
+			"roadID": 7,
+			"roadTime": 697598
+		},
+		{
+			"name": "Mall Sp.",
+			"limit1": 7000,
+			"limit2": 8000,
+			"world": 5,
+			"roadID": 0,
+			"roadTime": 532694
+		},
+		{
+			"name": "11km",
+			"limit1": 10000,
+			"limit2": 12000,
+			"world": 5,
+			"roadID": 6,
+			"roadTime": 822188
+		},
+		{
+			"name": "14.5km",
+			"limit1": 13500,
+			"limit2": 15500,
+			"world": 5,
+			"roadID": 6,
+			"roadTime": 323335
+		},
+		{
+			"name": "18km",
+			"limit1": 17000,
+			"limit2": 19000,
+			"world": 5,
+			"roadID": 7,
+			"roadTime": 439796
+		},
+		{
+			"name": "Park Top",
+			"limit1": 20000,
+			"limit2": 22000,
+			"world": 5,
+			"roadID": 27,
+			"roadTime": 15211
+		},
+		{
+			"name": "Tower Br.",
+			"limit1": 22500,
+			"limit2": 24000,
+			"world": 5,
+			"roadID": 7,
+			"roadTime": 891515
+		},
+		{
+			"name": "27.3km",
+			"limit1": 26000,
+			"limit2": 28000,
+			"world": 5,
+			"roadID": 7,
+			"roadTime": 697597
+		},
+		{
+			"name": "End",
+			"limit1": 30000,
+			"limit2": 32000,
+			"world": 5,
+			"roadID": 0,
+			"roadTime": 532693
+		}
+	]
+}

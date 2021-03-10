@@ -1,5 +1,6 @@
 {
-	"distance": 29300,
+	"distance": 29400,
+	"name": "Greater London Flat",
 	"reverse": false,
 	"lines": [
 		{
@@ -7,40 +8,82 @@
 			"roadTime": 1
 		},
 		{
-			"name": "3km",
-			"roadTime": 3000
+			"name": "3.6km",
+			"limit1": 3000,
+			"limit2": 4000,
+			"world": 5,
+			"roadID": 7,
+			"roadTime": 697598
 		},
 		{
-			"name": "6km",
-			"roadTime": 6000
+			"name": "Mall Sp.",
+			
+			"limit1": 5500,
+			"limit2": 7500,
+			"world": 5,
+			"roadID": 0,
+			"roadTime": 532827
+			
 		},
 		{
-			"name": "10km",
-			"roadTime": 10000
+		
+			"name": "9km",
+			"limit1": 8000,
+			"limit2": 10000,
+			"world": 5,
+			"roadID": 7,
+			"roadTime": 587853
+		
 		},
 		{
-			"name": "13km",
-			"roadTime": 13000
+			"name": "11.2km",
+			"limit1": 10000,
+			"limit2": 12000,
+			"world": 5,
+			"roadID": 6,
+			"roadTime": 260687
 		},
 		{
-			"name": "16km",
-			"roadTime": 16000
+			"name": "Lap 1",
+			
+			"limit1": 17500,
+			"limit2": 19500,
+			"world": 5,
+			"roadID": 0,
+			"roadTime": 532826
+			
 		},
 		{
-			"name": "20km",
-			"roadTime": 20000
+			"name": "21km",
+			"limit1": 20200,
+			"limit2": 23200,
+			"world": 5,
+			"roadID": 7,
+			"roadTime": 587854
 		},
 		{
-			"name": "23km",
-			"roadTime": 23000
+			"name": "23.2km",
+			"limit1": 22200,
+			"limit2": 24200,
+			"world": 5,
+			"roadID": 6,
+			"roadTime": 260688
 		},
 		{
-			"name": "26km",
-			"roadTime": 26000
+			"name": "Last Climb",
+			"limit1": 27000,
+			"limit2": 29000,
+			"world": 5,
+			"roadID": 6,
+			"roadTime": 871376
 		},
 		{
 			"name": "End",
-			"roadTime": 29300
+			"limit1": 29000,
+			"limit2": 31000,
+			"world": 5,
+			"roadID": 0,
+			"roadTime": 532825
 		}
 	]
 }
