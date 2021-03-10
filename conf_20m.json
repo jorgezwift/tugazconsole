@@ -1,0 +1,33 @@
+{
+    "ip": "192.168.10.12",
+    "port": 3000,
+    "user": "user",
+    "pwd": "pass",
+	"use_api": false,
+    "user_is_rider": false,
+    "user_zid": "289461",
+    "map": "greater_london",
+    "start_time": "210000",
+    "team_leader": 44983,
+    "team_class": "espresso",
+    "turn_timer_active": false,
+    "turns_sequence_name": [
+        "J. Carvalho",
+        "J. Nunes"
+    ],
+    "riders": [
+        {
+            "name": "Jose Cuevas R3R",
+            "zid": 44983,
+			"limit20m": 290,
+            "ftp": 285,
+            "ftp5m": 417,
+            "ftp20m": 295,
+            "weight": 53,
+            "active": true
+        }
+    ],
+    "other_teams": [
+	
+    ]
+}

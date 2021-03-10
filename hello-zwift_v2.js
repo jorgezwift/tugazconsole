@@ -20,11 +20,16 @@ module.exports = function(confFile, httpFile) {
 	
 	const monitor = new ZwiftPacketMonitor(ip.address())
 	const monitorLine = new ZwiftLineMonitor();
-	var account = new ZwiftAccount(config.user, config.pwd);
-
+	var account;
+	var world;
+	if(typeof config.use_api == 'undefined' || 
+			config.use_api){
+		account = new ZwiftAccount(config.user, config.pwd);
+		world = account.getWorld(1);
+	}
+	
 	//IGNORE
 	//var profile = account.getProfile(416001);
-	var world = account.getWorld(1);
 
 	var startTime = config.start_time;
 	//GET MAP DETAILS
@@ -715,50 +720,53 @@ module.exports = function(confFile, httpFile) {
 
 	monitor.start();
 
-	const interval = setInterval(function() {
-	   
-   	var today = new Date();
-	var h = today.getHours();
-	if(h<10)
-		h="0"+h;
-	var m = today.getMinutes();
-	if(m<10)
-		m="0"+m;
-	var s = today.getSeconds();
-	if(s<10)
-		s="0"+s;
-	var time = h + "" + m + "" + s;
-	//console.log(time);
-		for(var key in WTRLTeams){
-			var team = WTRLTeams[key];
-			if(time>team.startTime){
-				if(team.active && !team.complete){
-				//console.log("get: "+team.name);
-					world.riderStatus(team.zid).then(statuss => {
-						var course =  ((statuss.f19 & 0xff0000) >> 16);
-						var world = course - 2;
-						var roadID = ((statuss.f20 & 0xff00) >> 8);
-						var isTurning = ((statuss.f19 & 8) !== 0);
-						var isForward = ((statuss.f19 & 4) !== 0);
-						
-						statuss.roadID=roadID;
-						statuss.isTurning=isTurning;
-						statuss.isForward=isForward;
-						statuss.world=world;
-						
-						if(!ended){
-							//updateRiders(statuss.riderStatus);
-						}
-						
-						if(typeof WTRLTeams['team'+statuss.id] != 'undefined')
-							WTRLTeams['team'+statuss.id].distance = statuss.distance;
-				
-						monitorLine.updateRiderStatus(statuss, statuss.worldTime);
-					});
+	if(typeof config.use_api == 'undefined' || 
+		config.use_api){									
+		const interval = setInterval(function() {
+		   
+		var today = new Date();
+		var h = today.getHours();
+		if(h<10)
+			h="0"+h;
+		var m = today.getMinutes();
+		if(m<10)
+			m="0"+m;
+		var s = today.getSeconds();
+		if(s<10)
+			s="0"+s;
+		var time = h + "" + m + "" + s;
+		//console.log(time);
+			for(var key in WTRLTeams){
+				var team = WTRLTeams[key];
+				if(time>team.startTime){
+					if(team.active && !team.complete){
+					//console.log("get: "+team.name);
+						world.riderStatus(team.zid).then(statuss => {
+							var course =  ((statuss.f19 & 0xff0000) >> 16);
+							var world = course - 2;
+							var roadID = ((statuss.f20 & 0xff00) >> 8);
+							var isTurning = ((statuss.f19 & 8) !== 0);
+							var isForward = ((statuss.f19 & 4) !== 0);
+							
+							statuss.roadID=roadID;
+							statuss.isTurning=isTurning;
+							statuss.isForward=isForward;
+							statuss.world=world;
+							
+							if(!ended){
+								//updateRiders(statuss.riderStatus);
+							}
+							
+							if(typeof WTRLTeams['team'+statuss.id] != 'undefined')
+								WTRLTeams['team'+statuss.id].distance = statuss.distance;
+					
+							monitorLine.updateRiderStatus(statuss, statuss.worldTime);
+						});
+					}
 				}
 			}
-		}
-	 }, 8000);
+		 }, 8000);
+	}
 
 	process.on('unhandledRejection', error => {
 	  console.log('unhandledRejection', error.message);
