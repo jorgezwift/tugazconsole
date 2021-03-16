@@ -46,7 +46,7 @@
 		{
 			"name": "Lap 1",
 			
-			"limit1": 17500,
+			"limit1": 16500,
 			"limit2": 19500,
 			"world": 5,
 			"roadID": 0,
@@ -71,16 +71,16 @@
 		},
 		{
 			"name": "Last Climb",
-			"limit1": 27000,
-			"limit2": 29000,
+			"limit1": 26500,
+			"limit2": 28500,
 			"world": 5,
 			"roadID": 6,
 			"roadTime": 871376
 		},
 		{
 			"name": "End",
-			"limit1": 29000,
-			"limit2": 31000,
+			"limit1": 28500,
+			"limit2": 30500,
 			"world": 5,
 			"roadID": 0,
 			"roadTime": 532825

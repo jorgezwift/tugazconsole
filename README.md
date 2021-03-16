@@ -10,7 +10,8 @@ Sample html file located at index.html
 
 **port**: HTML server Port;  
 **user**: Zwift User;  
-**pwd**: Zwift Password;  
+**pwd**: Zwift Password; 
+**use_api**: **false** if you don't want to use Zwift API;  
 **user_is_rider**: **true** if user logged in Zwift Client is also a rider in the TTT. **false** if Zwift is in Fan View;  
 **user_zid**: Logged in rider Zwift ID;  
 **map**: Name of TTT map file (without extension). All maps located at maps/ folder;  
