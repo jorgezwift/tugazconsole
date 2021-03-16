@@ -428,8 +428,21 @@ module.exports = function(confFile, httpFile) {
 											p1sum = p1sum+item.power;
 										}
 									);
+									rider.power30s.pop();
+									rider.power30s.push({power: p1sum/p1count, date: (rider.time-60) , time: (rider.time-rider.power10s[0].time)});
 									rider.power10s=[];
-									rider.power30s.push({power: p1sum/p1count, time: (rider.time-60)});
+								}else{
+									var p1sum = 0;
+									var p1count = rider.power10s.length;
+									rider.power10s.forEach(
+										function(item, index, object){
+											p1sum = p1sum+item.power;
+										}
+									);
+									if(p1count>1){
+										rider.power30s.pop();
+									}
+									rider.power30s.push({power: p1sum/p1count, time: (rider.time-rider.power10s[0].time)});
 								}
 							}
 						} catch (e) {
@@ -438,7 +451,7 @@ module.exports = function(confFile, httpFile) {
 						try{					
 							rider.power30s.forEach(
 								function(item, index, object){
-									if(item.time<rider.time-(60*20)){
+									if(item.date<rider.time-(60*20)){
 										object.splice(index,1);
 									}else{
 										throw BreakException;

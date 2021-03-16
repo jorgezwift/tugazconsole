@@ -457,12 +457,14 @@
 							
 							if(rider.power30s.length>0){
 								var p20m = 0;
+								var p20t = 0;
 								rider.power30s.forEach(
 									function(item){
-										p20m = p20m+item.power;
+										p20m = p20m+(item.power*item.time);
+										p20t = p20t+item.time;
 									});
-									
-								rider.p20m = (Math.round((p20m/rider.weigth)*100/rider.power30s.length)/100);
+								p20m=p20m/p20t;
+								rider.p20m = (Math.round((p20m/rider.weigth)*100)/100);
 							}else
 								rider.p20m = 0;
 							
@@ -597,12 +599,14 @@
 						
 						if(rider.power30s.length>0){
 							var p20m = 0;
+							var p20t = 0;
 							rider.power30s.forEach(
 								function(item){
-									p20m = p20m+item.power;
+									p20m = p20m+(item.power*item.time);
+									p20t = p20t+item.time;
 								});
-								
-							rider.p20m = (Math.round((p20m/rider.weigth)*100/rider.power30s.length)/100);
+							p20m=p20m/p20t;
+							rider.p20m = (Math.round((p20m/rider.weigth)*100)/100);
 						}else
 							rider.p20m = 0;						
 						
