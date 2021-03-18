@@ -1,0 +1,91 @@
+{
+	"distance": 42300,
+	"name": "Out n Back Again",
+	"reverse": false,
+	"lines": [
+		{
+			"name": "Start",
+			"roadTime": 1
+		},
+		
+
+		{
+			"name": "5km",
+			"limit1": 4000,
+			"limit2": 6000,
+			"world": 4,
+			"roadID": 81,
+			"roadTime": 119166
+		},
+		{
+			"name": "Fuego Flats",
+			
+			"limit1": 9000,
+			"limit2": 11500,
+			"world": 4,
+			"roadID": 81,
+			"roadTime": 281068
+			
+		},
+		{
+		
+			"name": "T. Exit",
+			"limit1": 13000,
+			"limit2": 15000,
+			"world": 4,
+			"roadID": 1,
+			"roadTime": 539513
+		
+		},
+		{
+			"name": "18km",
+			"limit1": 17000,
+			"limit2": 19000,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 593112
+		},
+		{
+			"name": "KOM Start",
+			
+			"limit1": 21000,
+			"limit2": 23500,
+			"world": 4,
+			"roadID": 24,
+			"roadTime": 45979
+			
+		},
+		{
+			"name": "Volcano",
+			"limit1": 24500,
+			"limit2": 27200,
+			"world": 4,
+			"roadID": 24,
+			"roadTime": 821668
+		},
+		{
+			"name": "Villas Top",
+			"limit1": 32200,
+			"limit2": 34200,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 477150
+		},
+		{
+			"name": "Rev KOM",
+			"limit1": 35500,
+			"limit2": 38000,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 189616
+		},
+		{
+			"name": "End",
+			"limit1": 41500,
+			"limit2": 42500,
+			"world": 4,
+			"roadID": 81,
+			"roadTime": 30028
+		}
+	]
+}
