@@ -1,0 +1,89 @@
+{
+	"distance": 28330,
+	"name": "Watopias Waistband",
+	"reverse": false,
+	"lines": [
+		{
+			"name": "Start",
+			"roadTime": 1
+		},
+		{
+			"name": "5km",
+			"limit1": 4000,
+			"limit2": 6000,
+			"world": 4,
+			"roadID": 81,
+			"roadTime": 116277
+		},
+		{
+			"name": "F. Flats OUT",
+			
+			"limit1": 9000,
+			"limit2": 12000,
+			"world": 4,
+			"roadID": 81,
+			"roadTime": 281786
+			
+		},
+		{
+		
+			"name": "13km",
+			"limit1": 12000,
+			"limit2": 14000,
+			"world": 4,
+			"roadID": 6,
+			"roadTime": 37115
+		
+		},
+		{
+			"name": "15km",
+			"limit1": 14000,
+			"limit2": 16500,
+			"world": 4,
+			"roadID": 1,
+			"roadTime": 749520
+		},
+		{
+			"name": "17.5km",
+			
+			"limit1": 16500,
+			"limit2": 18500,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 502787
+			
+		},
+		{
+			"name": "20km",
+			"limit1": 19000,
+			"limit2": 21200,
+			"world": 4,
+			"roadID": 23,
+			"roadTime": 108522
+		},
+		{
+			"name": "W. Downtown",
+			"limit1": 22000,
+			"limit2": 24500,
+			"world": 4,
+			"roadID": 0,
+			"roadTime": 987554
+		},
+		{
+			"name": "F. Flats IN",
+			"limit1": 24000,
+			"limit2": 26500,
+			"world": 4,
+			"roadID": 79,
+			"roadTime": 700288
+		},
+		{
+			"name": "End",
+			"limit1": 27000,
+			"limit2": 29800,
+			"world": 4,
+			"roadID": 81,
+			"roadTime": 30264
+		}
+	]
+}
