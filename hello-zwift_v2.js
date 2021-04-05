@@ -793,6 +793,11 @@ module.exports = function(confFile, httpFile) {
 	  res.end(content);*/
 	  console.log("req.url: "+req.url);
 	  var filee = req.url;
+	
+	   if(filee.lastIndexOf("?")>-1){
+		  filee = filee.substring(0,filee.lastIndexOf("?"));
+	  }
+		
 	  if(filee == '/'){
 		  filee = "/"+httpFile;
 	  }
